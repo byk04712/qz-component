@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:59:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-10 17:36:49
+ * @LastEditTime: 2021-11-10 23:59:16
  * @Description: 
- * @FilePath: \admin-fronted\bgy-component\rollup.config.js
+ * @FilePath: /admin-fronted/bgy-component/rollup.config.js
  */
 import babel from '@rollup/plugin-babel'
 import json from '@rollup/plugin-json'
@@ -19,6 +19,7 @@ const es = {
     globals: {
       vue: 'Vue',
       compositionApi: 'VueCompositionAPI',
+      'ant-design-vue': 'antd'
     }
   },
   external: ['compositionApi', 'vue'],
@@ -40,6 +41,7 @@ const iife = {
     globals: {
       vue: 'Vue',
       '@vue/composition-api': 'VueCompositionAPI',
+      'ant-design-vue': 'antd'
     }
   },
   external: ['@vue/composition-api', 'vue'],
@@ -63,6 +65,7 @@ const minEs = {
     globals: {
       vue: 'Vue',
       '@vue/composition-api': 'VueCompositionAPI',
+      'ant-design-vue': 'antd'
     }
   },
   external: ['@vue/composition-api', 'vue'],
@@ -84,6 +87,7 @@ const cjs = {
     globals: {
       vue: 'Vue',
       compositionApi: 'VueCompositionAPI',
+      'ant-design-vue': 'antd'
     }
   },
   external: ['compositionApi', 'vue'],

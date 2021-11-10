@@ -2,15 +2,17 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-10 16:33:18
+ * @LastEditTime: 2021-11-10 23:57:21
  * @Description: 组件入口文件
- * @FilePath: \admin-fronted\bgy-component\src\index.js
+ * @FilePath: /admin-fronted/bgy-component/src/index.js
  */
 import { version } from '../package.json'
 import BgyForm from '../packages/form/index.js'
+import BgyThrottle from '../packages/throttle/index.js'
 
 const components = [
-  BgyForm
+  BgyForm,
+  BgyThrottle
 ]
 
 const install = (Vue, options = {}) => {
