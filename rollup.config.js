@@ -3,12 +3,14 @@
  * @Date: 2021-11-10 15:59:17
  * @LastEditors: Do not edit
  * @LastEditTime: 2021-11-10 23:59:16
- * @Description: 
+ * @Description:
  * @FilePath: /admin-fronted/bgy-component/rollup.config.js
  */
 import babel from '@rollup/plugin-babel'
 import json from '@rollup/plugin-json'
 import vuePlugin from 'rollup-plugin-vue'
+
+import { terser } from 'rollup-plugin-terser'
 
 const es = {
   input: './src/index.js',
@@ -26,11 +28,9 @@ const es = {
   plugins: [
     babel(),
     json(),
-    vuePlugin({ css: true, })
+    vuePlugin({ css: true })
   ]
 }
-
-
 
 const iife = {
   input: './src/index.js',
@@ -48,13 +48,9 @@ const iife = {
   plugins: [
     babel(),
     json(),
-    vuePlugin({ css: true, })
+    vuePlugin({ css: true })
   ]
-};
-
-
-
-import { terser } from 'rollup-plugin-terser';
+}
 
 const minEs = {
   input: './src/index.js',
@@ -72,11 +68,10 @@ const minEs = {
   plugins: [
     babel(),
     json(),
-    vuePlugin({ css: true, }),
-    terser(),
-  ],
-};
-
+    vuePlugin({ css: true }),
+    terser()
+  ]
+}
 
 const cjs = {
   input: './src/index.js',
@@ -94,8 +89,8 @@ const cjs = {
   plugins: [
     babel(),
     json(),
-    vuePlugin({ css: true, }),
-  ],
-};
+    vuePlugin({ css: true })
+  ]
+}
 
-export default [es, iife, minEs, cjs];
+export default [es, iife, minEs, cjs]
