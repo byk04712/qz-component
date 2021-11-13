@@ -4,7 +4,8 @@
   "description": "Vue2.x + Vite2.x + TypeScript 基于 Ant Design for Vue 封装通用组件库",
   "main": "index.js",
   "scripts": {
-    "test": "standard --fix"
+    "test": "standard --fix",
+    "build:style": "gulp --gulpfile build/build-style.js"
   },
   "keywords": [
     "vue",
@@ -21,9 +22,10 @@
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-json": "^4.1.0",
     "cp-cli": "^2.0.0",
+    "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
-    "gulp-cssmin": "^0.2.0",
+    "gulp-clean-css": "^4.3.0",
     "gulp-less": "^5.0.0",
     "lerna": "^4.0.0",
     "less": "^4.1.2",
