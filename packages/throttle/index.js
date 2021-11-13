@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-11-10 23:56:35
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-10 23:56:35
+ * @LastEditTime: 2021-11-13 09:04:31
  * @Description: 节流防抖
- * @FilePath: /admin-fronted/bgy-component/packages/throttle/index.js
+ * @FilePath: \admin-fronted\bgy-component\packages\throttle\index.js
  */
 
 import { message } from 'ant-design-vue'
