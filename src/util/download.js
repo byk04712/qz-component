@@ -1,29 +1,29 @@
-import Vue from "vue"
+import Vue from 'vue'
 
 /**
 * 保存
 * @param  {Binnary} data
 * @param  {String} filename 想要保存的文件名称
 */
-function saveAs(data, filename) {
+function saveAs (data, filename) {
   if (window.navigator.msSaveOrOpenBlob) {
-    navigator.msSaveBlob(data, filename);
+    navigator.msSaveBlob(data, filename)
   } else {
-    const blob = new Blob([data]);
-    const link = document.createElement('a');
-    const body = document.querySelector('body');
+    const blob = new window.Blob([data])
+    const link = document.createElement('a')
+    const body = document.querySelector('body')
 
-    link.href = window.URL.createObjectURL(blob);
-    link.download = filename;
+    link.href = window.URL.createObjectURL(blob)
+    link.download = filename
 
     // fix Firefox
-    link.style.display = 'none';
-    body.appendChild(link);
+    link.style.display = 'none'
+    body.appendChild(link)
 
-    link.click();
-    body.removeChild(link);
+    link.click()
+    body.removeChild(link)
 
-    window.URL.revokeObjectURL(link.href);
+    window.URL.revokeObjectURL(link.href)
   }
 }
 
@@ -36,22 +36,22 @@ function saveAs(data, filename) {
  */
 export default function (obj) {
   return new Promise((resolve, reject) => {
-    let {
+    const {
       url,
       method = 'post',
       params = {},
-      filename = Date.now().toString(),
-    } = obj;
+      filename = Date.now().toString()
+    } = obj
     if (!url) {
-      throw new Error('url不能为空');
+      throw new Error('url不能为空')
     }
     Vue.prototype.$http[method](url, params, {
       responseType: 'blob'
     })
       .then((res) => {
-        saveAs(res.data, filename);
-        resolve(res);
+        saveAs(res.data, filename)
+        resolve(res)
       })
-      .catch(reject);
-  });
+      .catch(reject)
+  })
 }
