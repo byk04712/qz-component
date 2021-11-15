@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 14:48:47
+ * @LastEditTime: 2021-11-15 16:21:54
  * @Description: 组件入口文件
  * @FilePath: \admin-fronted\bgy-component\src\index.js
  */
@@ -36,7 +36,7 @@ const install = (Vue, options = {}) => {
   Vue.filter('amount', amount)
   // 指令
   Vue.directive('modal', modal)
-
+  // 组件选项
   Vue.prototype.$BGY = {
     size: options.size || 'default'
   }

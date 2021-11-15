@@ -126,11 +126,11 @@ export default {
     },
     min: {
       type: [Number, String],
-      default: '40px'
+      default: '.54rem'
     },
     max: {
       type: [Number, String],
-      default: '40px'
+      default: '.54rem'
     }
   },
   /**

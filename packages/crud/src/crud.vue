@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 14:16:55
+ * @LastEditTime: 2021-11-15 17:39:12
  * @Description: CRUD 组件
  * @FilePath: \admin-fronted\bgy-component\packages\crud\src\crud.vue
 -->
@@ -155,7 +155,7 @@
           :customRender="(_, __, i) => i + 1"
           :title="showOrder.label || '序号'"
           :fixed="showOrder.fixed || 'left'"
-          :width="showOrder.width || '50px'"
+          :width="showOrder.width || '0.66rem'"
         >
         </a-table-column>
         <!-- 业务字段列 -->
@@ -207,12 +207,12 @@
 
 <script>
 import { debounce } from 'throttle-debounce';
-import Throttle from '@/packages/throttle';
-import BgyItem from '@/packages/item/index';
-import BgyItemRange from '@/packages/item-range';
-import download from '@/src/util/download';
-import SelectionMixin from '@/src/mixins/selection';
-import FormMixin from '@/src/mixins/form';
+import Throttle from '../../throttle';
+import BgyItem from '../../item/index';
+import BgyItemRange from '../../item-range';
+import download from '../../../src/util/download';
+import SelectionMixin from '../../../src/mixins/selection';
+import FormMixin from '../../../src/mixins/form';
 import ModalImport from './modalImport.vue';
 
 const [
@@ -469,7 +469,7 @@ export default {
           // 1. 展开状态为否
           // 2. 字段超出折叠数量
           // 3. 当前字段在超出的范围中
-          height: !this.expanded && this.searchMoreVisible && i > this.expendedSize - 1 ? '0' : '54px',
+          height: !this.expanded && this.searchMoreVisible && i > this.expendedSize - 1 ? '0' : '.54rem',
         };
       };
     },

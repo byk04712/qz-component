@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-09-18 16:15:38
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 13:09:48
+ * @LastEditTime: 2021-11-15 17:25:31
  * @Description: 弹窗导入
  * @FilePath: \admin-fronted\bgy-component\packages\crud\src\modalImport.vue
 -->
@@ -15,7 +15,7 @@
     title="批量导入信息"
     ok-text="确认"
     cancel-text="取消"
-    width="600px"
+    width="8rem"
     class="modal-import"
     @ok="handleOk"
     @cancel="handleCancel"
@@ -54,8 +54,8 @@
 </template>
 
 <script>
-import download from '@/src/util/download';
-import Throttle from '@/packages/throttle';
+import download from '../../../src/util/download';
+import Throttle from '../../throttle';
 
 export default {
   name: 'ModalImport',

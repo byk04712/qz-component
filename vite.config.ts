@@ -7,10 +7,13 @@ export default defineConfig(({ command, mode }) => {
   console.log(`当前处于 ${mode} 命令是 ${command}`);
   return {
     root: './examples',
+    // base: './',
+    // publicDir: './',
     plugins: [createVuePlugin()],
     resolve: {
       alias: {
-        '@': resolve(__dirname, '.')
+        main: resolve(__dirname, './src'),
+        packages: resolve(__dirname, './packages')
       }
       /*
       // vite官网配置说明https://cn.vitejs.dev/config/#resolve-extensions

@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-10-28 17:48:32
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 14:17:31
+ * @LastEditTime: 2021-11-15 17:27:41
  * @Description: 数据表格
  * @FilePath: \admin-fronted\bgy-component\packages\table\src\table.vue
 -->
@@ -28,7 +28,7 @@
         :customRender="(_, __, i) => i + 1"
         :title="showOrder.label || '序号'"
         :fixed="showOrder.fixed || 'left'"
-        :width="showOrder.width || '50px'"
+        :width="showOrder.width || '.66rem'"
       >
       </a-table-column>
       <!-- 业务字段列 -->

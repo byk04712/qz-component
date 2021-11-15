@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-10-28 14:53:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 13:04:39
+ * @LastEditTime: 2021-11-15 15:36:37
  * @Description: 表单
  * @FilePath: \admin-fronted\bgy-component\packages\form\src\form.vue
 -->
@@ -110,10 +110,10 @@
 
 <script>
 import { debounce } from 'throttle-debounce';
-import BgyItem from '@/packages/item';
-import BgyItemRange from '@/packages/item-range';
-import SelectionMixin from '@/src/mixins/selection';
-import FormMixin from '@/src/mixins/form';
+import BgyItem from '../../item';
+import BgyItemRange from '../../item-range';
+import SelectionMixin from '../../../src/mixins/selection';
+import FormMixin from '../../../src/mixins/form';
 
 export default {
   name: 'BgyForm',

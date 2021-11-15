@@ -2,31 +2,39 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:59:17
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-10 23:59:16
+ * @LastEditTime: 2021-11-15 16:14:11
  * @Description:
- * @FilePath: /admin-fronted/bgy-component/rollup.config.js
+ * @FilePath: \admin-fronted\bgy-component\rollup.config.js
  */
 import babel from '@rollup/plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
 import json from '@rollup/plugin-json'
 import vuePlugin from 'rollup-plugin-vue'
-
+import commomjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser'
 
 const es = {
   input: './src/index.js',
   output: {
-    file: 'dist/index.es.js',
+    file: 'dist/index.esm.js',
     name: 'BgyComponent',
     format: 'es',
     globals: {
       vue: 'Vue',
       compositionApi: 'VueCompositionAPI',
-      'ant-design-vue': 'antd'
+      'ant-design-vue': 'antd',
+      moment: 'moment'
     }
   },
-  external: ['compositionApi', 'vue'],
+  external: ['@vue/composition-api', 'vue', 'ant-design-vue', 'moment'],
   plugins: [
-    babel(),
+    resolve(),
+    commomjs(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      extensions: ['.ts', '.js']
+    }),
     json(),
     vuePlugin({ css: true })
   ]
@@ -41,18 +49,25 @@ const iife = {
     globals: {
       vue: 'Vue',
       '@vue/composition-api': 'VueCompositionAPI',
-      'ant-design-vue': 'antd'
+      'ant-design-vue': 'antd',
+      moment: 'moment'
     }
   },
-  external: ['@vue/composition-api', 'vue'],
+  external: ['@vue/composition-api', 'vue', 'ant-design-vue', 'moment'],
   plugins: [
-    babel(),
+    resolve(),
+    commomjs(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      extensions: ['.ts', '.js']
+    }),
     json(),
     vuePlugin({ css: true })
   ]
 }
 
-const minEs = {
+const umd = {
   input: './src/index.js',
   output: {
     file: 'dist/index.umd.js',
@@ -61,12 +76,19 @@ const minEs = {
     globals: {
       vue: 'Vue',
       '@vue/composition-api': 'VueCompositionAPI',
-      'ant-design-vue': 'antd'
+      'ant-design-vue': 'antd',
+      moment: 'moment'
     }
   },
-  external: ['@vue/composition-api', 'vue'],
+  external: ['@vue/composition-api', 'vue', 'ant-design-vue', 'moment'],
   plugins: [
-    babel(),
+    resolve(),
+    commomjs(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      extensions: ['.ts', '.js']
+    }),
     json(),
     vuePlugin({ css: true }),
     terser()
@@ -82,15 +104,22 @@ const cjs = {
     globals: {
       vue: 'Vue',
       compositionApi: 'VueCompositionAPI',
-      'ant-design-vue': 'antd'
+      'ant-design-vue': 'antd',
+      moment: 'moment'
     }
   },
-  external: ['compositionApi', 'vue'],
+  external: ['@vue/composition-api', 'vue', 'ant-design-vue', 'moment'],
   plugins: [
-    babel(),
+    resolve(),
+    commomjs(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      extensions: ['.ts', '.js']
+    }),
     json(),
     vuePlugin({ css: true })
   ]
 }
 
-export default [es, iife, minEs, cjs]
+export default [es, iife, umd, cjs]

@@ -13,7 +13,7 @@ const px2rem = require('postcss-px2rem')
 
 gulp.task('default', function () {
   const processors = [
-    px2rem({ remUnit: 75 })
+    px2rem({ remUnit: 100 })
   ]
   return gulp.src('../src/style/index.less')
     .pipe(less()) // 编译 less

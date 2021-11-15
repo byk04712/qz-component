@@ -2,11 +2,11 @@
  * @Author: 秦真
  * @Date: 2021-11-08 10:17:55
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 14:10:28
+ * @LastEditTime: 2021-11-15 15:59:03
  * @Description: 表单混入
  * @FilePath: \admin-fronted\bgy-component\src\mixins\form.js
  */
-import deepClone from 'lodash.clonedeep'
+import clonedeep from 'lodash.clonedeep'
 
 /**
  * 构造完整的 rule 项
@@ -117,8 +117,8 @@ export default {
         .forEach(item => {
           // 如果是区间输入框
           if (item.range) {
-            rules[item.begin] = buildRules(deepClone(item), '起始')
-            rules[item.end] = buildRules(deepClone(item), '结束')
+            rules[item.begin] = buildRules(clonedeep(item), '起始')
+            rules[item.end] = buildRules(clonedeep(item), '结束')
           } else {
             rules[item.key] = buildRules(item)
           }
