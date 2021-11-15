@@ -12,6 +12,12 @@
     "build:style": "gulp --gulpfile build/build-style.js",
     "lint": "standard --fix"
   },
+  "files": [
+    "packages",
+    "src",
+    "types",
+    "dist"
+  ],
   "keywords": [
     "vue",
     "vite",
@@ -22,6 +28,13 @@
   ],
   "author": "qinzhen09",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/byk04712/bgy-component.git"
+  },
+  "bugs": {
+      "url": "https://github.com/view-design/ViewUI/issues"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@rollup/plugin-babel": "^5.3.0",
