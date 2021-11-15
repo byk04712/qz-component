@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-10-28 17:48:32
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 11:47:16
+ * @LastEditTime: 2021-11-15 14:17:31
  * @Description: 数据表格
  * @FilePath: \admin-fronted\bgy-component\packages\table\src\table.vue
 -->
@@ -56,7 +56,7 @@
           <template v-else-if="item.amount && text != null">
             {{ (typeof item.amount === 'number' ? ((text || 0) / item.amount) : text) | amount }}
           </template>
-          <a-tooltip v-if="item.ellipsis" :title="text">
+          <a-tooltip v-else-if="item.ellipsis" placement="topLeft" :title="text">
             {{ text }}
           </a-tooltip>
           <template v-else>

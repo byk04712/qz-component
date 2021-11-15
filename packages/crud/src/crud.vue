@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 13:06:03
+ * @LastEditTime: 2021-11-15 14:16:55
  * @Description: CRUD 组件
  * @FilePath: \admin-fronted\bgy-component\packages\crud\src\crud.vue
 -->
@@ -183,7 +183,7 @@
             <template v-else-if="item.amount && text != null">
               {{ (typeof item.amount === 'number' ? ((text || 0) / item.amount) : text) | amount }}
             </template>
-            <a-tooltip v-if="item.ellipsis" :title="text">
+            <a-tooltip v-else-if="item.ellipsis" placement="topLeft" :title="text">
               {{ text }}
             </a-tooltip>
             <template v-else>
