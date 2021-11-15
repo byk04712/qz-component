@@ -2,97 +2,96 @@
  * @Author: 秦真
  * @Date: 2021-11-10 23:56:35
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-13 09:04:31
+ * @LastEditTime: 2021-11-15 11:01:57
  * @Description: 节流防抖
  * @FilePath: \admin-fronted\bgy-component\packages\throttle\index.js
  */
-
-import { message } from 'ant-design-vue'
+import { message } from 'ant-design-vue';
 
 const throttle = (fn, duration = 50, isDebounce, ctx, immediate) => {
-  let timer
-  let counter = 0
-  let lastCall = 0
+  let timer;
+  let counter = 0;
+  let lastCall = 0;
   return (...args) => {
     if (isDebounce) {
-      if (timer) clearTimeout(timer)
+      if (timer) clearTimeout(timer);
 
       if (immediate) {
-        const doNow = !timer
+        const doNow = !timer;
         timer = setTimeout(() => {
-          timer = null
-        }, duration)
+          timer = null;
+        }, duration);
         if (doNow) {
-          counter = 0
-          fn.apply(ctx, args)
+          counter = 0;
+          fn.apply(ctx, args);
         } else {
           // 超过3次给予提示信息
           if (counter > 3) {
-            message.warn('操作过于频繁')
-            counter = 0
+            message.warn('操作过于频繁');
+            counter = 0;
           } else {
             counter++
           }
         }
       }
     } else {
-      const now = new Date().getTime()
-      if (now - lastCall < duration) return
-
-      lastCall = now
-      fn.apply(ctx, args)
+      const now = new Date().getTime();
+      if (now - lastCall < duration) return;
+      
+      lastCall = now;
+      fn.apply(ctx, args);
     }
   }
 }
 
 export default {
   name: 'BgyThrottle',
-
+  
   abstract: true,
 
   props: {
     // 间隔时间
     time: {
       type: Number,
-      default: 300
+      default: 300,
     },
     // 截流的事件
     events: {
       type: String,
-      default: 'click'
+      default: 'click',
     },
     // 是否防抖处理
     isDebounce: {
       type: Boolean,
-      default: true
+      default: true,
     },
     // 是否立即执行
     isImmediate: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
 
-  created () {
+  created() {
     // 节流的事件名称，多个事件使用 , 分割
-    this.eventKeys = this.events.split(',')
-    this.originMap = {}
-    this.throttledMap = {}
+    this.eventKeys = this.events.split(',');
+    this.originMap = new Map();
+    this.throttledMap = new Map();
   },
 
-  render () {
-    const vnode = this.$slots.default[0] // 获取根元素
+  render() {
+    const vnode = this.$slots.default[0]; // 获取根元素
     this.eventKeys.forEach((eventName) => {
-      const target = vnode.data.on[eventName] // 获取处理事件
+      const target = vnode.data.on[eventName]; // 获取处理事件
 
-      if (target === this.originMap[eventName] && this.throttledMap[eventName]) {
-        vnode.data.on[eventName] = this.throttledMap[eventName]
+      if (target === this.originMap.get(eventName) && this.throttledMap.has(eventName)) {
+        vnode.data.on[eventName] = this.throttledMap.get(eventName);
       } else if (target) {
-        this.originMap[eventName] = target
-        this.throttledMap[eventName] = throttle(target, this.time, this.isDebounce, vnode, this.isImmediate)
-        vnode.data.on[eventName] = this.throttledMap[eventName]
+        this.originMap.set(eventName, target);
+        this.throttledMap.set(eventName, throttle(target, this.time, this.isDebounce, vnode, this.isImmediate));
+        vnode.data.on[eventName] = this.throttledMap.get(eventName);
       }
-    })
-    return vnode
-  }
+    });
+    return vnode;
+  },
 }
