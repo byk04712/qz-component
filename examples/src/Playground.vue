@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-13 14:27:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 09:39:39
+ * @LastEditTime: 2021-11-15 14:05:47
  * @Description: 
  * @FilePath: \admin-fronted\bgy-component\examples\src\Playground.vue
 -->
@@ -15,14 +15,11 @@
       <a-button type="primary" @click.native="onClick">节流按钮{{count}}</a-button>
     </bgy-throttle>
 
-    <bgy-form></bgy-form>
-
   </a-space>
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
-import { message } from 'ant-design-vue'
+import { defineComponent, ref } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'Playground',
@@ -30,13 +27,14 @@ export default defineComponent({
     msg: String
   },
   setup() {
+    const count = ref(0);
 
     const onClick = () => {
-      message.info(String(Math.random()))
+      count.value++
     }
     
     return {
-      count: 1230,
+      count,
       onClick
     }
   },

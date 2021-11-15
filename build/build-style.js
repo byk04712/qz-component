@@ -15,7 +15,7 @@ gulp.task('default', function () {
   const processors = [
     px2rem({ remUnit: 75 })
   ]
-  return gulp.src('../src/styles/index.less')
+  return gulp.src('../src/style/index.less')
     .pipe(less()) // 编译 less
     .pipe(autoprefixer()) // 是否添加浏览器前缀兼容
     .pipe(postcss(processors)) // px转rem
