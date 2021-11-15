@@ -1,0 +1,140 @@
+
+@css-prefix: 'bgy-';
+@split-prefix-cls: ~'@{css-prefix}split';
+@box-shadow: 0 0 4px 0 rgba(28, 36, 56, 0.4);
+@trigger-bar-background: rgba(23, 35, 61, 0.25);
+@trigger-background: #f8f8f9;
+@trigger-width: 8px;
+@trigger-bar-width: 8px;
+@trigger-bar-offset: (@trigger-width - @trigger-bar-width) / 2;
+@trigger-bar-interval: 3px;
+@trigger-bar-weight: 1px;
+@trigger-bar-con-height: (@trigger-bar-weight + @trigger-bar-interval) * 8;
+
+.bgy-split {
+  &-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px #d9d9d9 solid;
+    min-height: 40px;
+  }
+  &-pane {
+    position: absolute;
+    &.left-pane,
+    &.right-pane {
+      top: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+    &.left-pane {
+      left: 0;
+    }
+    &.right-pane {
+      right: 0;
+    }
+    &.top-pane,
+    &.bottom-pane {
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+    &.top-pane {
+      top: 0;
+    }
+    &.bottom-pane {
+      bottom: 0;
+    }
+
+    &-moving {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+  &-trigger {
+    border: 1px solid @border-color-base;
+    &-con {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      // transition-property: left, top;
+      // transition-duration: 0.4s;
+    }
+    &-bar-con {
+      position: absolute;
+      overflow: hidden;
+      cursor: pointer;
+      &.vertical {
+        left: @trigger-bar-offset;
+        top: 50%;
+        height: @trigger-bar-con-height;
+        transform: translate(0, -50%);
+        display: flex;
+        align-items: center;
+        background-color: #eee;
+      }
+      &.horizontal {
+        left: 50%;
+        top: @trigger-bar-offset;
+        width: @trigger-bar-con-height;
+        transform: translate(-50%, 0);
+        display: flex;
+        justify-content: center;
+        background-color: #eee;
+      }
+    }
+    &-vertical {
+      width: @trigger-width;
+      height: 100%;
+      background: @trigger-background;
+      border-top: none;
+      border-bottom: none;
+      cursor: col-resize;
+      .bgy-split-trigger-bar {
+        width: @trigger-bar-width;
+        height: 1px;
+        background: @trigger-bar-background;
+        float: left;
+        margin-top: @trigger-bar-interval;
+      }
+    }
+    &-horizontal {
+      height: @trigger-width;
+      width: 100%;
+      background: @trigger-background;
+      border-left: none;
+      border-right: none;
+      cursor: row-resize;
+      .bgy-split-trigger-bar {
+        height: @trigger-bar-width;
+        width: 1px;
+        background: @trigger-bar-background;
+        float: left;
+        margin-right: @trigger-bar-interval;
+      }
+    }
+  }
+  &-horizontal {
+    > .bgy-split-trigger-con {
+      top: 50%;
+      height: 100%;
+      width: 0;
+    }
+  }
+  &-vertical {
+    > .bgy-split-trigger-con {
+      left: 50%;
+      height: 0;
+      width: 100%;
+    }
+  }
+  .no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}

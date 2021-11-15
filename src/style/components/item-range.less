@@ -1,0 +1,26 @@
+.bgy-item-range {
+  overflow: hidden;
+  transition: height .2s;
+  // 开区间的分隔符号
+  .seperator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+  }
+  &--stage.ant-row.ant-form-item {
+    margin-bottom: 0;
+    .ant-form-item-label {
+      height: 32px;
+    }
+    &::after {
+      display: none;
+    }
+  }
+  // 输入框容器
+  .ant-form-item-control-wrapper {
+    .ant-calendar-picker {
+      width: 100% !important;
+    }
+  }
+}
