@@ -2,18 +2,26 @@
  * @Author: 秦真
  * @Date: 2021-11-13 14:27:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 14:05:47
+ * @LastEditTime: 2021-11-15 23:30:02
  * @Description: 
- * @FilePath: \admin-fronted\bgy-component\examples\src\Playground.vue
+ * @FilePath: /bgy-component/examples/src/Playground.vue
 -->
 <template>
   <a-space>
     
     {{ msg }}
 
+    <div @dblclick="log('dblclick 666')" @mousemove="log('mousemove')">666</div>
+
     <bgy-throttle>
-      <a-button type="primary" @click.native="onClick">节流按钮{{count}}</a-button>
+      <a-button type="primary" @click.native="onClick">按钮防抖{{count}}</a-button>
     </bgy-throttle>
+
+    <a-button
+      type="primary"
+      v-throttle="1000"
+      @click.native="onClick"
+    >按钮防抖{{count}}</a-button>
 
   </a-space>
 </template>
@@ -32,9 +40,14 @@ export default defineComponent({
     const onClick = () => {
       count.value++
     }
+
+    const log = info => {
+      console.log(info)
+    }
     
     return {
       count,
+      log,
       onClick
     }
   },

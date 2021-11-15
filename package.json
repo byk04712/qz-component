@@ -49,7 +49,9 @@
     "@vue/compiler-sfc": "^3.2.21",
     "@vue/composition-api": "^1.4.0-beta.0",
     "ant-design-vue": "^1.7.8",
+    "lodash.clonedeep": "^4.5.0",
     "moment": "^2.29.1",
+    "throttle-debounce": "^3.0.1",
     "vue": "^2.6.14",
     "vue-template-compiler": "^2.6.14"
   },

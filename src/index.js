@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 16:21:54
+ * @LastEditTime: 2021-11-15 23:10:24
  * @Description: 组件入口文件
- * @FilePath: \admin-fronted\bgy-component\src\index.js
+ * @FilePath: /bgy-component/src/index.js
  */
 import { version } from '../package.json'
 import Item from '../packages/item/index'
@@ -16,6 +16,7 @@ import Split from '../packages/split/index'
 import Throttle from '../packages/throttle/index'
 import amount from './filters/amount'
 import modal from './directive/modal'
+import throttle from './directive/throttle'
 
 const components = [
   Form,
@@ -36,6 +37,7 @@ const install = (Vue, options = {}) => {
   Vue.filter('amount', amount)
   // 指令
   Vue.directive('modal', modal)
+  Vue.directive('throttle', throttle)
   // 组件选项
   Vue.prototype.$BGY = {
     size: options.size || 'default'
