@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-10-28 17:48:32
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 17:27:41
+ * @LastEditTime: 2021-11-15 19:22:44
  * @Description: 数据表格
  * @FilePath: \admin-fronted\bgy-component\packages\table\src\table.vue
 -->
@@ -141,8 +141,8 @@ export default {
     scroll: {
       type: Object,
       default: () => ({
-        // x: '100%',
-        // y: '100%',
+        x: '100%',
+        y: '100%',
       }),
     },
   },
