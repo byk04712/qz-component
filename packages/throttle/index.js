@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-11-10 23:56:35
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 11:01:57
+ * @LastEditTime: 2021-11-18 00:15:25
  * @Description: 节流防抖
- * @FilePath: \admin-fronted\bgy-component\packages\throttle\index.js
+ * @FilePath: /bgy-component/packages/throttle/index.js
  */
 import { message } from 'ant-design-vue'
 
@@ -75,22 +75,21 @@ export default {
   created () {
     // 节流的事件名称，多个事件使用 , 分割
     this.eventKeys = this.events.split(',')
-    this.originMap = new Map()
     this.throttledMap = new Map()
   },
 
-  render () {
+  render() {
     const vnode = this.$slots.default[0] // 获取根元素
-    this.eventKeys.forEach((eventName) => {
-      const target = vnode.data.on[eventName] // 获取处理事件
-
-      if (target === this.originMap.get(eventName) && this.throttledMap.has(eventName)) {
-        vnode.data.on[eventName] = this.throttledMap.get(eventName)
-      } else if (target) {
-        this.originMap.set(eventName, target)
-        this.throttledMap.set(eventName, throttle(target, this.time, this.isDebounce, vnode, this.isImmediate))
-        vnode.data.on[eventName] = this.throttledMap.get(eventName)
+    this.eventKeys.forEach((evtName) => {
+      const handler = vnode.data.on[evtName] // 获取处理事件
+      if (this.throttledMap.has(evtName)) {
+        // vnode.data.on[evtName] = this.throttledMap.get(evtName)
+      } else if (handler) {
+        const throttleHandler = throttle(handler, this.time, this.isDebounce, vnode, this.isImmediate)
+        this.throttledMap.set(evtName, throttleHandler)
+        // vnode.data.on[evtName] = throttleHandler
       }
+      vnode.data.on[evtName] = () => {}
     })
     return vnode
   }
