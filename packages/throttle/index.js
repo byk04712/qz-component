@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-10 23:56:35
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-18 00:15:25
+ * @LastEditTime: 2021-11-18 00:33:57
  * @Description: 节流防抖
  * @FilePath: /bgy-component/packages/throttle/index.js
  */
@@ -83,13 +83,12 @@ export default {
     this.eventKeys.forEach((evtName) => {
       const handler = vnode.data.on[evtName] // 获取处理事件
       if (this.throttledMap.has(evtName)) {
-        // vnode.data.on[evtName] = this.throttledMap.get(evtName)
+        vnode.data.on[evtName] = this.throttledMap.get(evtName)
       } else if (handler) {
         const throttleHandler = throttle(handler, this.time, this.isDebounce, vnode, this.isImmediate)
         this.throttledMap.set(evtName, throttleHandler)
-        // vnode.data.on[evtName] = throttleHandler
+        vnode.data.on[evtName] = throttleHandler
       }
-      vnode.data.on[evtName] = () => {}
     })
     return vnode
   }
