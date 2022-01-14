@@ -2,20 +2,31 @@
  * @Author: 秦真
  * @Date: 2021-11-13 14:27:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 14:05:47
+ * @LastEditTime: 2021-11-18 23:41:24
  * @Description: 
- * @FilePath: \admin-fronted\bgy-component\examples\src\Playground.vue
+ * @FilePath: /bgy-component/examples/src/Playground.vue
 -->
 <template>
-  <a-space>
+  <div>
     
     {{ msg }}
 
+    <div @dblclick="log('dblclick 666')" @mousemove="log('mousemove')">666</div>
+    <br/>
     <bgy-throttle>
-      <a-button type="primary" @click.native="onClick">节流按钮{{count}}</a-button>
+      <a-button type="primary" @click.native="onClickA">抽象组件防抖A{{count}}</a-button>
     </bgy-throttle>
+    <bgy-throttle>
+      <a-button type="primary" @click.native="onClickB">抽象组件防抖B{{count}}</a-button>
+    </bgy-throttle>
+    <br/><br/>
+    <a-button
+      type="primary"
+      v-throttle.click="3000"
+      @click.native="onClickA"
+    >指令防抖{{count}}</a-button>
 
-  </a-space>
+  </div>
 </template>
 
 <script>
@@ -29,13 +40,22 @@ export default defineComponent({
   setup() {
     const count = ref(0);
 
-    const onClick = () => {
+    const onClickA = () => {
       count.value++
+    }
+    const onClickB = () => {
+      count.value--
+    }
+
+    const log = info => {
+      console.log(info)
     }
     
     return {
       count,
-      onClick
+      log,
+      onClickA,
+      onClickB
     }
   },
 })
