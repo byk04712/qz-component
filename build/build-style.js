@@ -17,7 +17,7 @@ gulp.task('default', function () {
   ]
   return gulp.src('../src/style/index.less')
     .pipe(less()) // 编译 less
-    .pipe(autoprefixer()) // 是否添加浏览器前缀兼容
+    .pipe(autoprefixer()) // 添加浏览器前缀兼容
     .pipe(postcss(processors)) // px转rem
     .pipe(cleanCSS()) // css 样式压缩
     .pipe(gulp.dest('../dist/'))

@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-11-13 14:27:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-18 23:41:24
+ * @LastEditTime: 2022-01-14 17:50:00
  * @Description: 
- * @FilePath: /bgy-component/examples/src/Playground.vue
+ * @FilePath: \bgy-component\examples\src\Playground.vue
 -->
 <template>
   <div>
@@ -22,8 +22,7 @@
     <br/><br/>
     <a-button
       type="primary"
-      v-throttle.click="3000"
-      @click.native="onClickA"
+      v-throttle.click="onClickA"
     >指令防抖{{count}}</a-button>
 
   </div>
@@ -31,6 +30,7 @@
 
 <script>
 import { defineComponent, ref } from '@vue/composition-api'
+import { message } from 'ant-design-vue'
 
 export default defineComponent({
   name: 'Playground',
@@ -41,6 +41,7 @@ export default defineComponent({
     const count = ref(0);
 
     const onClickA = () => {
+      message.info(count.value)
       count.value++
     }
     const onClickB = () => {

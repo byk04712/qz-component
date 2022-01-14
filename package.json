@@ -33,7 +33,7 @@
     "url": "https://github.com/byk04712/bgy-component.git"
   },
   "bugs": {
-      "url": "https://github.com/view-design/ViewUI/issues"
+    "url": "https://github.com/view-design/ViewUI/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

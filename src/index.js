@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 23:10:24
+ * @LastEditTime: 2022-01-14 16:38:13
  * @Description: 组件入口文件
- * @FilePath: /bgy-component/src/index.js
+ * @FilePath: \bgy-component\src\index.js
  */
 import { version } from '../package.json'
 import Item from '../packages/item/index'
@@ -15,8 +15,8 @@ import Crud from '../packages/crud/index'
 import Split from '../packages/split/index'
 import Throttle from '../packages/throttle/index'
 import amount from './filters/amount'
-import modal from './directive/modal'
-import throttle from './directive/throttle'
+import modal from './directives/modal'
+import throttle from './directives/throttle'
 
 const components = [
   Form,

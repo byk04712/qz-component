@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-10-28 17:48:32
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 19:22:44
+ * @LastEditTime: 2021-11-26 09:29:59
  * @Description: 数据表格
- * @FilePath: \admin-fronted\bgy-component\packages\table\src\table.vue
+ * @FilePath: \admin-frontedc:\Users\qinzhen09\workspace\bgy-component\packages\table\src\table.vue
 -->
 <template>
   <div class="bgy-table">
@@ -27,7 +27,7 @@
         :align="showOrder.align || 'center'"
         :customRender="(_, __, i) => i + 1"
         :title="showOrder.label || '序号'"
-        :fixed="showOrder.fixed || 'left'"
+        :fixed="showOrder.fixed"
         :width="showOrder.width || '.66rem'"
       >
       </a-table-column>
@@ -36,6 +36,7 @@
         :key="item.key"
         v-bind="item"
         v-for="item of showTableColumn"
+        :align="item.amount ? 'right' : item.align"
       >
         <template slot-scope="text, record, index, column">
           <!-- 如果有自定义列 -->
