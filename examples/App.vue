@@ -2,22 +2,47 @@
 
 <template>
   <div>
-    <playground :msg="msg" />
+    <a-tabs @change="onChange">
+      <a-tab-pane v-for="comp in componentList" :key="comp.name" :tab="comp.name"></a-tab-pane>
+    </a-tabs>
+
+    <!-- 组件 -->
+    <component :is="current.component"></component>
   </div>
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
-import Playground from './src/Playground.vue'
+import { defineComponent, reactive } from '@vue/composition-api'
 
 export default defineComponent({
   name: 'App',
-  components: {
-    Playground
-  },
   setup() {
+
+    const componentList = [
+      {
+        name: 'Playground',
+        component: () => import('./src/Playground.vue')
+      },
+      {
+        name: 'ThrottleTest',
+        component: () => import('./src/ThrottleTest.vue')
+      },
+    ]
+
+    const current = reactive({ ...componentList[0] })
+
+    const onChange = (name) => {
+      const cur = componentList.find(e => e.name === name)
+      Object.assign(current, {
+        name,
+        component: cur.component,
+      })
+    }
+
     return {
-      msg: 'Hello Vue 3 + TypeScript + Vite'
+      componentList,
+      current,
+      onChange
     }
   }
 })
