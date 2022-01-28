@@ -14,13 +14,23 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         main: resolve(__dirname, './src'),
         packages: resolve(__dirname, './packages')
-      }
+      },
       /*
       // vite官网配置说明https://cn.vitejs.dev/config/#resolve-extensions
       // vite 不再默认支持忽略.vue扩展名, 是因为 “设计如此”, 参考github上相关 issue 中尤雨溪的回答
       // https://github.com/vitejs/vite/issues/178#issuecomment-630138450
-      extensions: ['.js', '.ts', '.vue', '.json']
       */
+      extensions: ['.js', '.ts', '.vue', '.json']
+    },
+    server: {
+      port: 3000,
+      proxy: {
+        '/api': {
+          target: 'https://www.fastmock.site/mock/eb7f9e535c90fdde70880b7e088fca31/api/',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
+        }
+      }
     }
   }
 })
