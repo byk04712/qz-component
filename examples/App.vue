@@ -20,12 +20,16 @@ export default defineComponent({
 
     const componentList = [
       {
+        name: 'CrudTest',
+        component: () => import('./src/pages/CrudTest.vue')
+      },
+      {
         name: 'Playground',
-        component: () => import('./src/Playground.vue')
+        component: () => import('./src/pages/Playground.vue')
       },
       {
         name: 'ThrottleTest',
-        component: () => import('./src/ThrottleTest.vue')
+        component: () => import('./src/pages/ThrottleTest.vue')
       },
     ]
 

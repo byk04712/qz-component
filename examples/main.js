@@ -4,6 +4,7 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import BgyComponent from '../src/index'
 import '../dist/index.css'
+import './src/plugins/index'
 import App from './App.vue'
 
 Vue.use(VueCompositionAPI) // Vue3的 composition api 兼容 Vue2 插件
