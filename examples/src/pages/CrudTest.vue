@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2022-01-26 17:02:22
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-01-28 16:11:01
+ * @LastEditTime: 2022-02-14 14:58:16
  * @Description: 
  * @FilePath: \bgy-component\examples\src\pages\CrudTest.vue
 -->
@@ -19,7 +19,16 @@ export default defineComponent({
   name: 'CrudTest',
   setup() {
     const crudConfig = reactive({
+      // 分页接口
       requestUrl: 'basic/basic/contract/pageList',
+      // 搜索字段
+      searchItem: [
+        {
+          label: '颜色',
+          type: 'text'
+        },
+      ],
+      // 数据列
       tableColumn: [
         {
           dataIndex: 'color',
