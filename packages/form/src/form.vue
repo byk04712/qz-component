@@ -17,93 +17,95 @@
       :rules="currentRules"
       layout="horizontal"
     >
-      <a-row type="flex" align="middle">
-        <a-col
-          v-for="(item, i) of showFormItem"
-          :key="item.key"
-          :span="span"
-        >
-          <!-- 自定义字段 -->
-          <template v-if="item.type === 'slot'">
-
-            <!-- 如果提供了 label -->
-            <a-form-model-item
-              v-if="item.label"
-              :ref="item.key"
-              :label="item.label"
-              :prop="item.key"
-              auto-link
-              :colon="item.colon !== false"
-            >
+      <template v-for="(item, i) of showFormItem">
+        <!-- 自定义字段 -->
+        <template v-if="item.type === 'slot'">
+          <!-- 如果提供了 label -->
+          <a-form-model-item
+            :ref="item.key"
+            :key="item.key"
+            :label="item.label"
+            :prop="item.key"
+            auto-link
+            :colon="item.colon !== false"
+            :label-col="getLabelCol(item)"
+            :wrapper-col="getWrapperCol(item)"
+            :style="getColStyle(item)"
+          >
+            <!-- 是否提供了 [item.key]-label 插槽 -->
+            <template v-if="$slots[`${item.key}-label`] || $scopedSlots[`${item.key}-label`]" #label>
               <slot
-                v-if="$slots[item.key] || $scopedSlots[item.key]"
-                :name="item.key"
-                :form="formData"
-                :item="item"
-                :index="i"
-              ></slot>
-            </a-form-model-item>
-            <template v-else>
-              <slot
-                v-if="$slots[item.key] || $scopedSlots[item.key]"
-                :name="item.key"
+                :name="`${item.key}-label`"
                 :form="formData"
                 :item="item"
                 :index="i"
               ></slot>
             </template>
-          </template>
-
-          <!-- 区间输入框字段 -->
-          <bgy-item-range
-            v-else-if="item.range"
-            :props="item"
-            v-model="formData"
-            @rangeChange="handleRangeChange"
-          >
-          </bgy-item-range>
-
-          <!-- 非区间输入框字段 -->
-          <a-form-model-item
-            v-else
-            :ref="item.key"
-            :label="item.label"
-            :prop="item.key"
-            auto-link
-            :colon="item.colon !== false"
-          >
-            <bgy-item
-              :props="item"
-              :label-col="labelCol"
-              v-model="formData[item.key]"
-            >
-            </bgy-item>
-          </a-form-model-item>
-        </a-col>
-
-        <!-- 提交表单栏 -->
-        <a-col
-          v-if="buttonVisible"
-          :span="24 - footerOffset"
-          :offset="footerOffset"
-          :style="`text-align:${rowSize > 1 ? 'right' : 'left'};`"
-        >
-          <a-space>
+            <!-- 是否提供了 label 属性 -->
+            <template v-else-if="item.label" #label>{{ item.label }}</template>
             <slot
-              name="button"
+              v-if="$slots[item.key] || $scopedSlots[item.key]"
+              :name="item.key"
               :form="formData"
+              :item="item"
+              :index="i"
             ></slot>
-            <a-button
-              v-if="submitable"
-              type="primary"
-              :loading="isSubmiting"
-              @click="debounceSubmit">{{ submitText }}</a-button>
-            <a-button
-              v-if="resetable"
-              @click="handleReset">{{ resetText }}</a-button>
-          </a-space>
-        </a-col>
-      </a-row>
+          </a-form-model-item>
+        </template>
+
+        <!-- 区间输入框字段 -->
+        <bgy-item-range
+          v-else-if="item.range"
+          :key="item.begin"
+          :props="item"
+          v-model="formData"
+          :style="getColStyle(item)"
+          @rangeChange="handleRangeChange"
+        >
+        </bgy-item-range>
+
+        <!-- 非区间输入框字段 -->
+        <a-form-model-item
+          v-else
+          :ref="item.key"
+          :key="item.begin"
+          :label="item.label"
+          :prop="item.key"
+          auto-link
+          :colon="item.colon !== false"
+          :label-col="getLabelCol(item)"
+          :wrapper-col="getWrapperCol(item)"
+          :style="getColStyle(item)"
+        >
+          <bgy-item
+            :props="item"
+            v-model="formData[item.key]"
+          >
+          </bgy-item>
+        </a-form-model-item>
+      </template>
+      <!-- 提交表单栏 -->
+      <a-form-model-item
+        v-if="buttonVisible"
+        :wrapper-col="actionWrapperCol"
+        class="bgy-form--action"
+        :style="`width:${widthPercent}%;text-align:${rowSize > 1 ? 'right' : 'left'}`"
+      >
+        <a-space>
+          <a-button
+            v-if="submitable"
+            type="primary"
+            :loading="isSubmiting"
+            @click="debounceSubmit">{{ submitText }}</a-button>
+          <a-button
+            v-if="resetable"
+            @click="handleReset">{{ resetText }}</a-button>
+          <slot
+            name="button"
+            :form="formData"
+          ></slot>
+        </a-space>
+      </a-form-model-item>
     </a-form-model>
   </div>
 </template>
@@ -207,14 +209,9 @@ export default {
   },
 
   computed: {
-    // a-col span属性
-    span() {
-      return 24 / this.rowSize;
-    },
-
-    // 提交栏的 a-col offset 属性
-    footerOffset() {
-      return this.rowSize > 1 ? 0 : this.labelCol.span;
+    // 字段占比百分比
+    widthPercent() {
+      return (100 / this.rowSize).toFixed(2);
     },
 
     // 按钮操作栏是否展示
@@ -226,6 +223,21 @@ export default {
     showFormItem() {
       return this.formItem.filter(e => e.show !== false);
     },
+
+    actionWrapperCol() {
+      return {
+        offset: this.rowSize > 1 ? 0 : this.labelCol.span,
+      };
+    },
+
+    // 操作栏样式
+    // operationStyle() {
+    //   return {
+    //     flex: '1 0 auto',
+    //     width: `${this.widthPercent}%`,
+    //     textAlign: this.rowSize > 1 ? 'right' : 'left',
+    //   };
+    // },
   },
 
   watch: {
@@ -265,11 +277,7 @@ export default {
       this.initFormItem(this.formItem);
 
       // 初始化表单数据
-      const formData = this.initFormData(this.formItem);
-      this.formData = {
-        ...formData,
-        ...this.formData,
-      };
+      this.formData = this.initFormData(this.formItem, this.formData);
 
       // 初始化下拉框数据
       this.initSelectOptions();
@@ -331,13 +339,44 @@ export default {
 
           // 进行表单提交
           this.isSubmiting = true;
+          const formData = this.translateFormData(this.formItem, this.formData);
           // 往外抛 submit 事件
-          this.$emit('submit', this.formData, this.stopLoading);
+          this.$emit('submit', formData, this.stopLoading);
         } else {
           // 校验失败，往外抛事件
           this.$emit('validateError', faildFields);
         }
       });      
+    },
+
+    // a-form-model-item 的 label-col 属性
+    getLabelCol(item) {
+      // 合并 this.labelCol 和 item.labelCol，item.labelCol 优先级高
+      const labelCol = Object.assign({}, this.labelCol, item.labelCol);
+      return Object.keys(labelCol).reduce((acc, key) => {
+        acc[key] = labelCol[key] / (item.grow || 1);
+        return acc;
+      }, {});
+    },
+
+    // a-form-model-item 的 wrapper-col 属性
+    getWrapperCol(item) {
+      // 合并 this.wrapperCol 和 item.wrapperCol, item.wrapperCol 优先级高
+      const wrapperCol = Object.assign({}, this.wrapperCol, item.wrapperCol);
+      return Object.keys(wrapperCol).reduce((acc, key) => {
+        // acc[key] = 24 - (wrapperCol[key] / (item.grow || 1));
+        acc[key] = wrapperCol[key] / (item.grow || 1);
+        return acc;
+      }, {});
+    },
+    
+    // 动态设置 a-col 的样式
+    getColStyle(item) {
+      const wPercent = this.widthPercent * (item.grow || 1);
+      return {
+        flex: `0 0 ${wPercent}%`,
+        maxWidth: `${wPercent}%`,
+      };
     },
 
     stopLoading() {

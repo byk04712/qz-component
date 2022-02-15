@@ -2,12 +2,12 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 17:39:12
+ * @LastEditTime: 2022-02-15 09:29:02
  * @Description: CRUD 组件
- * @FilePath: \admin-fronted\bgy-component\packages\crud\src\crud.vue
+ * @FilePath: \bgy-component\packages\crud\src\crud.vue
 -->
 <template>
-  <div class="bgy-crud">
+  <a-spin class="bgy-crud" :spinning="spinning">
     <!-- 表单搜索区域 -->
     <a-card
       v-if="showSearchFormItem.length"
@@ -20,6 +20,7 @@
       <a-form-model
         ref="searchRuleForm"
         :label-col="labelCol"
+        :wrapper-col="wrapperCol"
         :label-align="labelAlign"
         :model="searchFormData"
         :rules="searchFormRules"
@@ -31,7 +32,8 @@
           <template v-if="item.type === 'slot'">
             <a-form-model-item
               :key="item.key"
-              :label-col="item.labelCol || labelCol"
+              :label-col="getLabelCol(item)"
+              :wrapper-col="getWrapperCol(item)"
               :label-align="item.labelAlign || labelAlign"
               :colon="item.colon !== false"
               :prop="item.key"
@@ -76,7 +78,8 @@
             v-else
             :key="item.key"
             :label="item.label"
-            :label-col="item.labelCol || labelCol"
+            :label-col="getLabelCol(item)"
+            :wrapper-col="getWrapperCol(item)"
             :label-align="item.labelAlign || labelAlign"
             :colon="item.colon !== false"
             :prop="item.key"
@@ -86,14 +89,14 @@
           >
             <bgy-item
               :props="item"
-              :label-col="labelCol || labelCol"
+              :label-col="item.labelCol || labelCol"
               v-model="searchFormData[item.key]"
             >
             </bgy-item>
           </a-form-model-item>
         </template>
 
-        <a-form-model-item class="bgy-crud-search--action" :style="`width:${widthPercent}%;`">
+        <a-form-model-item :wrapper-col="{ span : 24 }" class="bgy-crud-search--action" :style="`width:${widthPercent}%;`">
           <a-space>
             <a-button html-type="submit" type="primary">搜索</a-button>
             <a-button @click="handleReset">重置</a-button>
@@ -121,17 +124,22 @@
         </div>
         <!-- 操作栏右边 -->
         <a-space class="bgy-crud-action--right">
+          <!--
           <throttle
             v-for="(item, i) of actionButtonList"
             :key="i"
           >
+           -->
             <a-button
+              v-for="(item, i) of actionButtonList"
+              :key="i"
               v-bind="item"
-              @click.native="handleActionClick(item)"
+              v-throttle.click="handleActionClick(item)"
             >
+              <!-- @click.native="handleActionClick(item)" -->
               {{ item.label }}
             </a-button>
-          </throttle>
+          <!-- </throttle> -->
         </a-space>
       </a-space>
       <!-- 数据展示 -->
@@ -147,15 +155,23 @@
         ref="table"
         size="small"
         :scroll="scroll"
+        v-bind="$attrs"
+        v-on="$listeners"
       >
+        <template
+          :slot="expandedRowRenderVisible ? 'expandedRowRender' : '___'"
+          slot-scope="record, index, indent, expanded">
+          <slot name="expandedRowRender" :record="record" :index="index" :indent="indent" :expanded="expanded" />
+        </template>
+
         <!-- 序号列 -->
         <a-table-column
           v-if="showOrder"
           :align="showOrder.align || 'center'"
-          :customRender="(_, __, i) => i + 1"
+          :customRender="(_, __, i) => (i + 1) + ((pager.current - 1) * pager.pageSize)"
           :title="showOrder.label || '序号'"
-          :fixed="showOrder.fixed || 'left'"
-          :width="showOrder.width || '0.66rem'"
+          :fixed="showOrder.fixed || false"
+          :width="showOrder.width || '50px'"
         >
         </a-table-column>
         <!-- 业务字段列 -->
@@ -163,6 +179,7 @@
           :key="item.key"
           v-bind="item"
           v-for="item of showTableColumn"
+          :align="item.amount ? 'right' : item.align"
         >
           <template slot-scope="text, record, index, column">
             <!-- 如果有自定义列 -->
@@ -200,20 +217,21 @@
       :visible.sync="importModalVisible"
       :config="importConfig"
       @import-success="handleImportSuccess"
+      v-on="$listeners"
     >
     </modal-import>
-  </div>
+  </a-spin>
 </template>
 
 <script>
 import { debounce } from 'throttle-debounce';
-import Throttle from '../../throttle';
-import BgyItem from '../../item/index';
+// import Throttle from '@/components/throttle';
+import BgyItem from '../../item';
 import BgyItemRange from '../../item-range';
 import download from '../../../src/util/download';
 import SelectionMixin from '../../../src/mixins/selection';
 import FormMixin from '../../../src/mixins/form';
-import ModalImport from './modalImport.vue';
+import ModalImport from './modalImport';
 
 const [
   ACTION_ADD,
@@ -270,7 +288,7 @@ export default {
   mixins: [SelectionMixin, FormMixin],
 
   components: {
-    Throttle,
+    // Throttle,
     ModalImport,
     BgyItem,
     BgyItemRange,
@@ -355,16 +373,6 @@ export default {
     showOrder: {
       type: [Boolean, Object],
       default: false,
-      validator(value) {
-        // 如果是 Boolean 类型，则通过
-        if (typeof value === 'boolean') {
-          return true;
-        }
-        const keys = Object.keys(value);
-        // 类型为 Object 必须包含以下属性
-        // label 自定义展示名字，默认为 '序号'
-        return keys.length && ['label'].every(prop => keys.includes(prop));
-      },
     },
 
     // 批量导入配置
@@ -446,10 +454,21 @@ export default {
 
       // 批量导入弹窗
       importModalVisible: false,
+
+      // 加载中状态
+      spinning: false,
     };
   },
 
   computed: {
+
+    /**
+     * 是否展示 expandedRowRender
+     */
+    expandedRowRenderVisible() {
+      return Boolean(this.$slots.expandedRowRender || this.$scopedSlots.expandedRowRender);
+    },
+
     /**
      * 查询字段占比百分比
      */
@@ -458,27 +477,17 @@ export default {
     },
 
     /**
-     * 动态设置 a-col 的样式
-     */
-    getColStyle() {
-      return (item, i) => {
-        const wPercent = this.widthPercent * (item.grow || 1);
-        return {
-          flex: `0 0 ${wPercent}%`,
-          maxWidth: `${wPercent}%`,
-          // 1. 展开状态为否
-          // 2. 字段超出折叠数量
-          // 3. 当前字段在超出的范围中
-          height: !this.expanded && this.searchMoreVisible && i > this.expendedSize - 1 ? '0' : '.54rem',
-        };
-      };
-    },
-
-    /**
      * a-form-model 的 label-col 属性
      */
     labelCol() {
       return { md: 0, lg: 10, xl: 8, xxl: 6 };
+    },
+
+    /**
+     * a-form-model 的 wrapper-col 属性
+     */
+    wrapperCol() {
+      return { md: 24, lg: 14, xl: 16, xxl: 18 };
     },
 
     /**
@@ -594,7 +603,7 @@ export default {
         this.getTableData();
       },
     },
-    
+
   },
 
   created() {
@@ -629,7 +638,26 @@ export default {
      * 动态设置表格高度
      */
     dynamicSetTableHeight() {
-      // const tableEl = this.$refs.table.$el;
+      if (!this.$refs.table) {
+        return;
+      }
+      const tableEl = this.$refs.table.$el;
+      const offsetWidth = tableEl.querySelector('.ant-table-fixed').offsetWidth;
+
+      // 如果没有数据
+      const emptyEl = tableEl.querySelector('.ant-table-placeholder');
+      if (emptyEl) {
+        emptyEl.style.width = `${offsetWidth}px`;
+      }
+
+      const headerEl = tableEl.querySelector('.ant-table-header');
+      const bodyEl = tableEl.querySelector('.ant-table-body');
+      if (headerEl) {
+        headerEl.style.minWidth = `${offsetWidth}px`;
+      }
+      if (bodyEl) {
+        bodyEl.style.minWidth = `${offsetWidth}px`;
+      }
 
       // const searchHeight = this.$el.querySelector('.bgy-crud-search')?.clientHeight || 0;
       // const actionHeight = this.$el.querySelector('.bgy-crud-action')?.clientHeight || 0;
@@ -658,6 +686,41 @@ export default {
         //   item.style.height = `${headerHeight}px`;
         // });
       // }
+    },
+
+    /**
+     * a-form-model-item 的 label-col 属性
+     */
+    getLabelCol(item) {
+      return Object.keys(this.labelCol).reduce((acc, key) => {
+        acc[key] = this.labelCol[key] / (item.grow || 1);
+        return acc;
+      }, {});
+    },
+
+    /**
+     * a-form-model-item 的 wrapper-col 属性
+     */
+    getWrapperCol(item) {
+      return Object.keys(this.labelCol).reduce((acc, key) => {
+        acc[key] = 24 - (this.labelCol[key] / (item.grow || 1));
+        return acc;
+      }, {});
+    },
+
+    /**
+     * 动态设置 a-col 的样式
+     */
+    getColStyle(item, i) {
+      const wPercent = this.widthPercent * (item.grow || 1);
+      return {
+        flex: `0 0 ${wPercent}%`,
+        maxWidth: `${wPercent}%`,
+        // 1. 展开状态为否
+        // 2. 字段超出折叠数量
+        // 3. 当前字段在超出的范围中
+        height: !this.expanded && this.searchMoreVisible && i > this.expendedSize - 1 ? '0' : '54px',
+      };
     },
 
     /**
@@ -707,12 +770,13 @@ export default {
                   }
                 });
               }
-            } 
+            }
           } else {
             acc[item.key] = this.searchFormData[item.key];
             // 如果值为 '' 时，则从 searchFormData 中 delete 掉
             const value = this.searchFormData[item.key];
-            if (value === '') {
+            // value 为 '' 且未提供 valueParse 函数
+            if (value === '' && !item.valueParse) {
               delete acc[item.key];
             }
           }
@@ -729,7 +793,8 @@ export default {
      * 获取表格数据
      */
     getTableData() {
-      this.tableLoading = true;
+      this.spinning = true;
+      // this.tableLoading = true;
       // this.tableData = [];
 
       const { current, pageSize: size } = this.pager;
@@ -759,8 +824,13 @@ export default {
           this.tableData = records;
           this.$emit('data-change', this.tableData, requestParams);
         })
+        .catch(e => {
+          this.$emit('error', e);
+        })
         .finally(() => {
-          this.tableLoading = false;
+          // this.tableLoading = false;
+          this.spinning = false;
+          this.debounceGetTableHeight(); // 疑似解决页面长时间不操作，拉动横向滚动条时表头空白问题
         });
     },
 
@@ -772,6 +842,7 @@ export default {
         current,
         pageSize,
       });
+      // this.$el.scrollIntoView();
       this.getTableData();
     },
 
@@ -793,6 +864,8 @@ export default {
      */
     handleReset() {
       this.searchFormData = this.initFormData(this.searchItem);
+      // 页码重置到第一页
+      this.pager.current = 1;
       this.$emit('reset-search', this.searchFormData);
       // 重置后立马调用查询
       if (this.resetOnSearch) {
@@ -828,23 +901,43 @@ export default {
             break;
         }
       }
-      this.$emit('action-click', button);
+      this.$emit('action-click', button, this.stopSpinning);
+    },
+
+    /**
+     * 结束 Spining 状态
+     */
+    stopSpinning() {
+      this.spinning = false;
     },
 
     /**
      * 导出功能
      */
-    handleExport() {
+    async handleExport() {
       const {
         url, // 导出的接口
         withSearchParams = true, // 导出时 是否带上查询条件
         withPagination = false, // 导出时 是否带上查询条件
         filename = `${Date.now()}.xlsx`,
+        beforeValidate,         // 导出前的自定义校验, 返回 true 则继续
+        timeout = 30 * 1000,    // 导出超时时间
       } = this.exportConfig || {};
+
+      this.spinning = true;
+
+      if (typeof beforeValidate === 'function') {
+        const validate = await beforeValidate();
+        if (!validate) {
+          this.stopSpinning();
+          return;
+        }
+      }
 
       const config = {
         url,
-        filename
+        filename,
+        timeout
       };
 
       // 带上分页
@@ -865,7 +958,10 @@ export default {
       }
       download(config)
         .then((res) => {
-          this.$temit('export-success', res);
+          this.$emit('export-success', res);
+        })
+        .finally(() => {
+          this.spinning = false;
         });
     },
 
@@ -875,7 +971,7 @@ export default {
     handleImportSuccess(res) {
       this.$emit('import-success', res);
       this.getTableData();
-    },
+    }
   },
 };
 </script>

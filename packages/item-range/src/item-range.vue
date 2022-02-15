@@ -32,34 +32,37 @@
               v-if="props.type === 'date'"
               v-model="beginModelValue"
               :placeholder="placeholder[0]"
-              :format="format"
-              :value-format="valueFormat"
+              :format="format[0]"
+              :value-format="valueFormat[0]"
               :show-time="showBeginTime"
               :allow-clear="allowClear"
               :disabled-date="disabledBeginDate"
               :disabled-time="disabledBeginDateTime"
+              :disabled="disabled[0]"
             />
             <!-- 月份范围输入框 -->
             <a-month-picker
               v-else-if="props.type === 'month'"
               v-model="beginModelValue"
               :placeholder="placeholder[0]"
-              :format="format"
-              :value-format="valueFormat"
+              :format="format[0]"
+              :value-format="valueFormat[1]"
               :allow-clear="allowClear"
               :disabled-date="disabledBeginDate"
+              :disabled="disabled[0]"
             />
             <!-- 年份范围输入框 -->
             <a-date-picker
               v-else-if="props.type === 'year'"
               v-model="beginModelValue"
               :placeholder="placeholder[0]"
-              :format="format"
-              :value-format="valueFormat"
+              :format="format[0]"
+              :value-format="valueFormat[1]"
               :show-time="showBeginTime"
               :allow-clear="allowClear"
               :disabled-date="disabledBeginDate"
               mode="year"
+              :disabled="disabled[0]"
               @panelChange="handleBeginPanelChange"
             />
           </a-form-model-item>
@@ -79,34 +82,37 @@
               v-if="props.type === 'date'"
               v-model="endModelValue"
               :placeholder="placeholder[1]"
-              :format="format"
-              :value-format="valueFormat"
+              :format="format[1]"
+              :value-format="valueFormat[1]"
               :show-time="showEndTime"
               :allow-clear="allowClear"
               :disabled-date="disabledEndDate"
               :disabled-time="disabledEndDateTime"
+              :disabled="disabled[1]"
             />
             <!-- 月份范围输入框 -->
             <a-month-picker
               v-else-if="props.type === 'month'"
               v-model="endModelValue"
               :placeholder="placeholder[1]"
-              :format="format"
-              :value-format="valueFormat"
+              :format="format[1]"
+              :value-format="valueFormat[1]"
               :allow-clear="allowClear"
               :disabled-date="disabledEndDate"
+              :disabled="disabled[1]"
             />
             <!-- 年份范围输入框 -->
             <a-date-picker
               v-else-if="props.type === 'year'"
               v-model="endModelValue"
               :placeholder="placeholder[1]"
-              :format="format"
-              :value-format="valueFormat"
+              :format="format[1]"
+              :value-format="valueFormat[1]"
               :show-time="showEndTime"
               :allow-clear="allowClear"
               :disabled-date="disabledEndDate"
               mode="year"
+              :disabled="disabled[1]"
               @panelChange="handleEndPanelChange"
             />
           </a-form-model-item>
@@ -126,6 +132,7 @@
         <!-- 日期范围输入框 -->
         <a-range-picker
           v-if="props.type === 'date'"
+          :ranges="props.ranges"
           v-model="rangeModelValue"
           :placeholder="placeholder"
           :format="format"
@@ -133,12 +140,14 @@
           :show-time="showTime"
           :allow-clear="allowClear"
           :separator="separator"
+          :disabled="disabled"
           @change="handleChange"
         />
 
         <!-- 月份/年份范围输入框 -->
         <a-range-picker
           v-else-if="['month', 'year'].includes(props.type)"
+          :ranges="props.ranges"
           v-model="rangeModelValue"
           :placeholder="placeholder"
           :format="format"
@@ -146,6 +155,7 @@
           :allow-clear="allowClear"
           :separator="separator"
           :mode="[props.type, props.type]"
+          :disabled="disabled"
           @panelChange="handlePanelChange"
         />
       </a-form-model-item>
@@ -176,13 +186,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-
-    // a-col 的 span
-    labelCol: {
-      type: Object,
-      default: () => ({}),
-    },
-
     // v-model
     value: {
       type: Object,
@@ -225,48 +228,80 @@ export default {
           beginPlaceholder || '开始月份',
           endPlaceholder || '结束月份'
         ];
-      }  
+      }
       if (this.props.type === 'year') {
         return [
           beginPlaceholder || '开始年份',
           endPlaceholder || '结束年份'
         ];
-      }      
+      }
       return [];
     },
 
     // 展示格式化
-    format() {
-      // 日期范围输入框
-      if (this.props.type === 'date') {
-        return this.props.format || 'YYYY-MM-DD';
+    format({ props }) {
+      if (props.stage) { // 开区间
+        const [beginFormat, endFormat] = Array.isArray(props.format) ? props.format : [props.format, props.format];
+        if (props.type === 'date') {
+          return [beginFormat || 'YYYY-MM-DD', endFormat || 'YYYY-MM-DD'];
+        }
+        // 月份范围输入框
+        if (props.type === 'month') {
+          return [beginFormat || 'YYYY-MM', endFormat || 'YYYY-MM'];
+        }
+        // 年份范围输入框
+        if (props.type === 'year') {
+          return [beginFormat || 'YYYY', endFormat || 'YYYY'];
+        }
+        return [beginFormat, endFormat];
+      } else { // 闭区间
+        // 日期范围输入框
+        if (props.type === 'date') {
+          return props.format || 'YYYY-MM-DD';
+        }
+        // 月份范围输入框
+        if (props.type === 'month') {
+          return props.format || 'YYYY-MM';
+        }
+        // 年份范围输入框
+        if (props.type === 'year') {
+          return props.format || 'YYYY';
+        }
+        return props.format;
       }
-      // 月份范围输入框
-      if (this.props.type === 'month') {
-        return this.props.format || 'YYYY-MM';
-      }
-      // 年份范围输入框
-      if (this.props.type === 'year') {
-        return this.props.format || 'YYYY';
-      }
-      return this.props.format;
     },
 
     // value 格式化
-    valueFormat() {
-      // 日期范围输入框
-      if (this.props.type === 'date') {
-        return this.props.valueFormat || 'YYYY-MM-DD';
+    valueFormat({ props }) {
+      if (props.stage) { // 开区间
+        const [beginValueFormat, endValueFormat] = Array.isArray(props.valueFormat) ? props.valueFormat : [props.valueFormat, props.valueFormat];
+        if (props.type === 'date') {
+          return [beginValueFormat || 'YYYY-MM-DD', endValueFormat || 'YYYY-MM-DD'];
+        }
+        // 月份范围输入框
+        if (props.type === 'month') {
+          return [beginValueFormat || 'YYYY-MM', endValueFormat || 'YYYY-MM'];
+        }
+        // 年份范围输入框
+        if (props.type === 'year') {
+          return [beginValueFormat || 'YYYY', endValueFormat || 'YYYY'];
+        }
+        return [beginValueFormat, endValueFormat];
+      } else { // 闭区间
+        // 日期范围输入框
+        if (props.type === 'date') {
+          return props.valueFormat || 'YYYY-MM-DD';
+        }
+        // 月份范围输入框
+        if (props.type === 'month') {
+          return props.valueFormat || 'YYYY-MM';
+        }
+        // 月份范围输入框
+        if (props.type === 'year') {
+          return props.valueFormat || 'YYYY';
+        }
+        return props.valueFormat;
       }
-      // 月份范围输入框
-      if (this.props.type === 'month') {
-        return this.props.valueFormat || 'YYYY-MM';
-      }
-      // 月份范围输入框
-      if (this.props.type === 'year') {
-        return this.props.valueFormat || 'YYYY';
-      }
-      return this.props.valueFormat;
     },
 
     // 是否增加时间选择功能，如果为 true，则开始时间默认为：00:00:00

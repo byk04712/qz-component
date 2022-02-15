@@ -2,12 +2,12 @@
  * @Author: 秦真
  * @Date: 2021-10-28 17:48:32
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-26 09:29:59
+ * @LastEditTime: 2022-02-15 09:51:40
  * @Description: 数据表格
- * @FilePath: \admin-frontedc:\Users\qinzhen09\workspace\bgy-component\packages\table\src\table.vue
+ * @FilePath: \bgy-component\packages\table\src\table.vue
 -->
 <template>
-  <div class="bgy-table">
+  <div class="bgy-table" :class="{ 'bgy-table--title': title }">
     <a-table
       :data-source="dataSource"
       :loading="tableLoading"
@@ -20,15 +20,26 @@
       ref="table"
       size="small"
       :scroll="scroll"
+      v-bind="$attrs"
+      v-on="$listeners"
     >
+      <!-- 表格标题 -->
+      <div v-if="title" slot="title">{{ title }}</div>
+
+      <template
+        :slot="expandedRowRenderVisible ? 'expandedRowRender' : '___'"
+        slot-scope="record, index, indent, expanded">
+        <slot name="expandedRowRender" :record="record" :index="index" :indent="indent" :expanded="expanded" />
+      </template>
+
       <!-- 序号列 -->
       <a-table-column
         v-if="showOrder"
         :align="showOrder.align || 'center'"
         :customRender="(_, __, i) => i + 1"
         :title="showOrder.label || '序号'"
-        :fixed="showOrder.fixed"
-        :width="showOrder.width || '.66rem'"
+        :fixed="showOrder.fixed || false"
+        :width="showOrder.width || '50px'"
       >
       </a-table-column>
       <!-- 业务字段列 -->
@@ -76,6 +87,8 @@ export default {
   props: {
     // 请求接口地址获取数据，优先级高于 tableData
     requestUrl: String,
+    // 请求接口地址方法
+    ajaxMethod: String,
 
     // 数据表列
     tableColumn: {
@@ -105,16 +118,6 @@ export default {
     showOrder: {
       type: [Boolean, Object],
       default: false,
-      validator(value) {
-        // 如果是 Boolean 类型，则通过
-        if (typeof value === 'boolean') {
-          return true;
-        }
-        const keys = Object.keys(value);
-        // 类型为 Object 必须包含以下属性
-        // label 自定义展示名字，默认为 '序号'
-        return keys.length && ['label'].every(prop => keys.includes(prop));
-      },
     },
 
     // 分页器，如果为 false 则表示不分页，每页展示数则为 9999
@@ -146,6 +149,15 @@ export default {
         y: '100%',
       }),
     },
+
+    // 表格标题
+    title: String,
+
+    // params 参数变更时，是否自动重新发起请求 
+    deepParams: {
+      type: Boolean,
+      default: true,
+    }
   },
 
   data() {
@@ -165,6 +177,12 @@ export default {
   },
 
   computed: {
+    /**
+     * 是否展示 expandedRowRender
+     */
+    expandedRowRenderVisible() {
+      return Boolean(this.$slots.expandedRowRender || this.$scopedSlots.expandedRowRender);
+    },
     page() {
       // 如果不分页
       if (this.pagination === false) {
@@ -209,6 +227,14 @@ export default {
         }
       },
     },
+    params: {
+      deep: true,
+      handler() {
+        if (this.deepParams) {
+          this.getTableData();
+        }
+      },
+    },
   },
 
   created() {
@@ -245,8 +271,7 @@ export default {
         },
       };
 
-      this.$http
-        .post(this.requestUrl, requestParams)
+      this.$http[this.ajaxMethod || 'post'](this.requestUrl, requestParams)
         .then(res => {
           const {
             records = [],

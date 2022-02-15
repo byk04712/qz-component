@@ -1,11 +1,25 @@
 .bgy-form {
-  .ant-form-item {
-    .ant-form-item-children {
-      .ant-input-number,        // 数字输入框
-      .ant-calendar-picker      // 日期输入框
-      {
-        width: 100%;
+  .ant-form {
+    display: flex;
+    flex-flow: row wrap;
+    .ant-form-item {
+      align-items: flex-start;
+      .ant-form-item-children {
+        // 多行文本框
+        .ant-input-affix-wrapper {
+          textarea.ant-input {
+            margin-bottom: -6px !important;
+          }
+        }
+        .ant-input-number,        // 数字输入框
+        .ant-calendar-picker      // 日期输入框
+        {
+          width: 100%;
+        }
       }
     }
+  }
+  &--action {
+    flex: 1 0 auto;
   }
 }

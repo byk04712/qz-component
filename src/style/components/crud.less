@@ -2,17 +2,19 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  // 搜素区域
   &-search {
     &--action {
       flex: 1 0 auto;
       text-align: right;
     }
     .ant-card-body {
-      background-color: #fafafa;
+      // background-color: #fafafa;
+      box-shadow: 0 0 9px 3px #f1f1f1;
       .ant-col {
         overflow: hidden;
         .ant-form-explain {
-          font-size: 10px;
+          font-size: 12px;
         }
       }
       .ant-form {
@@ -32,14 +34,28 @@
                 margin-top: 4px;
               }
             }
+            .ant-form-item-children {
+              // 多行文本框
+              .ant-input-affix-wrapper {
+                textarea.ant-input {
+                  margin-bottom: -6px !important;
+                }
+              }
+              .ant-input-number,        // 数字输入框
+              .ant-calendar-picker      // 日期输入框
+              {
+                width: 100%;
+              }
+            }
           }
         }
       }
     }
   }
+  // 操作栏区域
   &-action {
     width: 100%;
-    height: 42px;
+    height: 54px;
     justify-content: space-between;
     padding: 0 6px;
     &--left {
@@ -49,19 +65,69 @@
       // background-color: yellow;
     }
   }
+  // 表格展示区域
   &-view {
     flex: 1;
+    margin-top: 10px;
     .ant-card-body {
       padding: 0;
+      .ant-table-fixed-left,
       .ant-table-fixed-right {
+        .ant-table-hide-scrollbar {
+          margin-bottom: -10px;
+          padding-bottom: 10px;
+        }
         .ant-table-body-inner {
           overflow-y: auto !important;
         }
       }
       .ant-table-wrapper {
+        // 修复正常情况下表格展示横向滚动条问题
+        // .ant-table-small {
+        //   // 由于左右边框会占用1像素空间,导致正常能全部展示的数据表会出现横向滚动栏
+        //   border-left: none;
+        //   border-right: none;
+        //   position: relative;
+        //   &:before,
+        //   &:after {
+        //     position: absolute;
+        //     width: 1px;
+        //     top: 0;
+        //     height: 100%;
+        //     content: '';
+        //     z-index: 99;
+        //   }
+        //   &:before {
+        //     left: 0;
+        //     background-color: #f0f0f0;
+        //   }
+        //   &:after {
+        //     right: 0;
+        //     background-color: #f0f0f0;
+        //   }
+        // }
         .ant-table-scroll {
+          overflow-x: unset;
+          .ant-table-header {
+            overflow: hidden !important;
+            padding-bottom: 10px !important;
+          }
           .ant-table-body {
-            overflow: auto !important;
+            overflow: initial !important;
+            // overflow: hidden !important;
+          }
+          .ant-table-placeholder {
+            overflow: auto;
+          }
+        }
+        // 隐藏展开行多出的首列
+        &.hidden-expandedrowrender {
+          .ant-table-expand-icon-th,
+          .ant-table-row-expand-icon-cell {
+            min-width: 0;
+            width: 0px;
+            padding: 0px !important;
+            overflow: hidden;
           }
         }
       }
@@ -69,27 +135,6 @@
       .ant-table-pagination {
         // height: 64px;
         padding-right: 12px;
-      }
-    }
-  }
-  .ant-card {
-    .ant-form {
-      &.ant-form-vertical {
-        .ant-form-item {
-          display: flex;
-          &-label {
-            padding-bottom: 0;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-          }
-          &-control-wrapper {
-            flex: 1;
-            .ant-calendar-picker {
-              width: 100%;
-            }
-          }
-        }
       }
     }
   }

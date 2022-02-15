@@ -1,7 +1,60 @@
 .bgy-table {
+  &.bgy-table--title {
+    .ant-table-title {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 15px 0;
+      &:before {
+        position: absolute;
+        content: '';
+        left: -16px;
+        width: 6px;
+        height: 40%;
+        background-color: #EB57A4;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    .ant-table {
+      border: none;
+      .ant-table-content {
+        border: 1px solid #f0f0f0;
+      }
+    }
+  }
   .ant-table-wrapper {
+    .ant-table-scroll {
+      .ant-table-header {
+        overflow: hidden !important;
+        padding-bottom: 10px !important;
+      }
+      .ant-table-body {
+        overflow: auto !important;
+      }
+    }
+
+    // 隐藏展开行多出的首列
+    &.hidden-expandedrowrender {
+      .ant-table-expand-icon-th,
+      .ant-table-row-expand-icon-cell {
+        display: none;
+        min-width: 0;
+        width: 0px;
+        padding: 0px !important;
+        overflow: hidden;
+      }
+    }
     .ant-table-content {
+      overflow: auto;
+      .ant-table-body {
+        margin: 0;
+      }
+      .ant-table-fixed-left,
       .ant-table-fixed-right {
+        .ant-table-hide-scrollbar {
+          margin-bottom: -10px;
+          padding-bottom: 10px;
+        }
         .ant-table-body-inner {
           overflow-y: auto !important;
         }

@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-09-18 16:15:38
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 17:25:31
+ * @LastEditTime: 2022-02-15 09:55:00
  * @Description: 弹窗导入
- * @FilePath: \admin-fronted\bgy-component\packages\crud\src\modalImport.vue
+ * @FilePath: \bgy-component\packages\crud\src\modalImport.vue
 -->
 <template>
   <a-modal
@@ -12,10 +12,10 @@
     v-modal.drag
     :keyboard="false"
     :maskClosable="false"
-    title="批量导入信息"
+    :title="config.title || '批量导入信息'"
     ok-text="确认"
     cancel-text="取消"
-    width="8rem"
+    width="600px"
     class="modal-import"
     @ok="handleOk"
     @cancel="handleCancel"
@@ -31,13 +31,14 @@
           </a-upload>
         </div>
         <!-- 提供了template配置才展示下载模版按钮 -->
-        <throttle v-if="config.template">
+        <!-- <throttle v-if="config.template"> -->
           <a-button
+            v-if="config.template"
             type="link"
             :loading="donwloadLoading"
-            @click.native="handleDownTemp"
+            v-throttle.click="handleDownTemp"
           >下载模版</a-button>
-        </throttle>
+        <!-- </throttle> -->
       </div>
     </a-spin>
     <!-- 文件上传 -->
@@ -55,13 +56,13 @@
 
 <script>
 import download from '../../../src/util/download';
-import Throttle from '../../throttle';
+// import Throttle from '@/components/throttle';
 
 export default {
   name: 'ModalImport',
 
   components: {
-    Throttle,
+    // Throttle,
   },
 
   props: {
@@ -125,8 +126,12 @@ export default {
         response: '',
         url: '',
       };
-      //放入上传列表中，以便于显示上传进度
-      this.fileUpload.fileList.push(fileInfo);
+      if (this.fileUpload.multiple) {
+        //放入上传列表中，以便于显示上传进度
+        this.fileUpload.fileList.push(fileInfo);
+      } else {
+        this.fileUpload.fileList = [fileInfo];
+      }
     },
     
     // handleUploadChange(obj) {
@@ -151,18 +156,27 @@ export default {
 
     handleOk() {
       // this.handleCancel();
+      if (!this.fileUpload.fileList.length) {
+        this.$message.warning('请选择上传文件');
+        return;
+      }
+      const { url, ignoreErrors } = this.config || {};
       this.importing = true;
       const formData = new FormData();
       formData.append('file', this.fileData.file);
-      this.$http.post(this.config.url, formData, {
+      this.$http.post(url, formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-        }
+        },
+        ignoreErrors
       })
         .then((res) => {
           this.$message.success('批量导入成功');
           this.$emit('import-success', res);
           this.handleCancel();
+        })
+        .catch(err => {
+          this.$emit('import-fail', err);
         })
         .finally(() => {
           this.importing = false;

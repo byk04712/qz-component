@@ -7,149 +7,187 @@
  * @FilePath: \admin-fronted\src\components\item\index.vue
 -->
 <template>
-  <!-- 下拉选项框 -->
-  <a-select
-    v-if="props.type === 'select'"
-    v-model="modelValue"
-    :placeholder="placeholder"
-    :allow-clear="allowClear"
-    :mode="props.mode"
-    @change="handleChange"
-  >
-    <a-select-option
-      v-for="item of props.options"
-      :key="item.value"
-      :value="item.value"
+  <div class="bgy-item">
+    <!-- 下拉选项框 -->
+    <a-select
+      v-if="props.type === 'select'"
+      v-model="modelValue"
+      :placeholder="placeholder"
+      :allow-clear="allowClear"
+      :mode="props.mode"
+      :disabled="disabled"
+      @change="handleChange"
     >
-      {{ item.label }}
-    </a-select-option>
-  </a-select>
-
-  <!-- 日期选择框 -->
-  <a-date-picker
-    v-else-if="props.type === 'date'"
-    v-model="modelValue"
-    :placeholder="placeholder"
-    :format="format"
-    :value-format="valueFormat"
-    :allow-clear="allowClear"
-    @blur="handleBlur"
-    @change="handleChange"
-  />
-
-  <!-- 月份选择框 -->
-  <a-month-picker
-    v-else-if="props.type === 'month'"
-    v-model="modelValue"
-    :placeholder="placeholder"
-    :format="format"
-    :value-format="valueFormat"
-    :allow-clear="allowClear"
-    @blur="handleBlur"
-    @change="handleChange"
-  />
-
-  <!-- 年份选择框 -->
-  <a-date-picker
-    v-else-if="props.type === 'year'"
-    v-model="modelValue"
-    :placeholder="placeholder"
-    :format="format"
-    :value-format="valueFormat"
-    :allow-clear="allowClear"
-    mode="year"
-    @panelChange="handlePanelChange"
-    @change="handleChange"
-  />
-
-  <!-- 省市区级联选择框 -->
-  <!-- 
-  <area-cascader 
-    v-else-if="props.type === 'area'" 
-    v-bind="props.resourceConfig"
-    :placeholder="placeholder"
-    v-model="modelValue"
-  />
-   -->
-
-  <!-- 级联选择框 -->
-  <a-cascader
-    v-else-if="props.type === 'cascader'" 
-    v-bind="props.resourceConfig"
-    :placeholder="placeholder"
-    v-model="modelValue"
-  />
-
-  <!-- 数字输入框 -->
-  <a-input-number
-    v-else-if="props.type === 'number'"
-    v-model="modelValue"
-    :min="props.min"
-    :max="props.max"
-    :formatter="formatter"
-    :parser="parser"
-    :precision="props.precision"
-    :decimal-separator="props.decimalSeparator"
-    :step="props.step"
-    @change="handleChange"
-  />
-
-  <!-- 单选框 -->
-  <a-radio-group
-    v-else-if="props.type === 'radio'"
-    v-model="modelValue"
-    button-style="solid"
-    @change="handleChange"
-  >
-    <template v-if="props.mode === 'button'">
-      <a-radio-button
+      <a-select-option
         v-for="item of props.options"
         :key="item.value"
         :value="item.value"
       >
         {{ item.label }}
-      </a-radio-button>
-    </template>
-    <a-radio
-      v-else
-      v-for="item of props.options"
-      :key="item.value"
-      :value="item.value"
+      </a-select-option>
+    </a-select>
+
+    <!-- 日期选择框 -->
+    <a-date-picker
+      v-else-if="props.type === 'date'"
+      v-model="modelValue"
+      :placeholder="placeholder"
+      :format="format"
+      :value-format="valueFormat"
+      :allow-clear="allowClear"
+      :disabled="disabled"
+      @blur="handleBlur"
+      @change="handleChange"
+    />
+
+    <!-- 月份选择框 -->
+    <a-month-picker
+      v-else-if="props.type === 'month'"
+      v-model="modelValue"
+      :placeholder="placeholder"
+      :format="format"
+      :value-format="valueFormat"
+      :allow-clear="allowClear"
+      :disabled="disabled"
+      @blur="handleBlur"
+      @change="handleChange"
+    />
+
+    <!-- 年份选择框 -->
+    <a-date-picker
+      v-else-if="props.type === 'year'"
+      v-model="modelValue"
+      :placeholder="placeholder"
+      :format="format"
+      :value-format="valueFormat"
+      :allow-clear="allowClear"
+      mode="year"
+      :disabled="disabled"
+      @panelChange="handlePanelChange"
+      @change="handleChange"
+    />
+
+    <!-- 省市区级联选择框 -->
+    <area-cascader
+      v-else-if="props.type === 'area'"
+      v-bind="props.resourceConfig"
+      :placeholder="placeholder"
+      v-model="modelValue"
+    />
+
+    <!-- 级联选择框 -->
+    <a-cascader
+      v-else-if="props.type === 'cascader'"
+      v-bind="props.resourceConfig"
+      :placeholder="placeholder"
+      v-model="modelValue"
+    />
+
+    <!-- 数字输入框 -->
+    <a-input-number
+      v-else-if="props.type === 'number'"
+      v-model="modelValue"
+      :min="props.min"
+      :max="props.max"
+      :formatter="formatter"
+      :parser="parser"
+      :precision="props.precision"
+      :decimal-separator="props.decimalSeparator"
+      :step="props.step"
+      :disabled="disabled"
+      @change="handleChange"
+    />
+
+    <!-- 单选框 -->
+    <a-radio-group
+      v-else-if="props.type === 'radio'"
+      v-model="modelValue"
+      button-style="solid"
+      :disabled="disabled"
+      @change="handleChange"
     >
-      {{ item.label }}
-    </a-radio>
-  </a-radio-group>
+      <template v-if="props.mode === 'button'">
+        <a-radio-button
+          v-for="item of props.options"
+          :key="item.value"
+          :value="item.value"
+          :disabled="item.disabled"
+        >
+          {{ item.label }}
+        </a-radio-button>
+      </template>
+      <a-radio
+        v-else
+        v-for="item of props.options"
+        :key="item.value"
+        :value="item.value"
+        :disabled="item.disabled"
+      >
+        {{ item.label }}
+      </a-radio>
+    </a-radio-group>
 
-  <!-- 复选框 -->
-  <a-checkbox-group
-    v-else-if="props.type === 'checkbox'"
-    v-model="modelValue"
-    :options="props.options"
-    @change="handleChange"
-  />
+    <!-- 复选框 -->
+    <a-checkbox-group
+      v-else-if="props.type === 'checkbox'"
+      v-model="modelValue"
+      :options="props.options"
+      :disabled="disabled"
+      @change="handleChange"
+    />
 
-  <!-- 开关 -->
-  <a-switch
-    v-else-if="props.type === 'switch'"
-    v-model="modelValue"
-    :checked-children="props.checkedChildren"
-    :un-checked-children="props.unCheckedChildren"
-  />
+    <!-- 开关 -->
+    <a-switch
+      v-else-if="props.type === 'switch'"
+      v-model="modelValue"
+      :checked-children="props.checkedChildren"
+      :un-checked-children="props.unCheckedChildren"
+      :disabled="disabled"
+    />
 
-  <!-- 文本输入框(默认项) -->
-  <a-input
-    v-else
-    :allow-clear="allowClear"
-    :placeholder="placeholder"
-    v-model="modelValue"
-    :max-length="maxLength"
-    @blur="handleBlur($event.target.value)"
-    @change="handleChange($event.target.value)"
-  >
-    <a-tooltip v-if="props.tooltip" slot="suffix" :title="props.tooltip">
-      <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
-    </a-tooltip>
-  </a-input>
+    <!-- 多行文本输入框 -->
+    <a-textarea
+      v-else-if="props.type === 'textarea'"
+      v-model="modelValue"
+      :allow-clear="allowClear"
+      :placeholder="placeholder"
+      :max-length="maxLength"
+      :auto-size="props.autoSize || { minRows: 1, maxRows: 4 }"
+      :disabled="disabled"
+      @blur="handleBlur($event.target.value)"
+      @change="handleChange($event.target.value)"
+    />
+
+    <!-- 密码输入框 -->
+    <a-input-password
+      v-else-if="props.type === 'password'"
+      v-model="modelValue"
+      :allow-clear="allowClear"
+      :placeholder="placeholder"
+      :max-length="maxLength"
+      :visibility-toggle="props.visibilityToggle"
+      :disabled="disabled"
+      @blur="handleBlur($event.target.value)"
+      @change="handleChange($event.target.value)"
+    />
+
+    <!-- 文本输入框(默认项) -->
+    <a-input
+      v-else
+      :allow-clear="allowClear"
+      :placeholder="placeholder"
+      v-model="modelValue"
+      :max-length="maxLength"
+      :disabled="disabled"
+      @blur="handleBlur($event.target.value)"
+      @change="handleChange($event.target.value)"
+    >
+      <a-tooltip v-if="props.tooltip" slot="suffix" :title="props.tooltip">
+        <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
+      </a-tooltip>
+    </a-input>
+
+  </div>
 </template>
 
 <script>
@@ -176,7 +214,7 @@ export default {
 
   // components: { AreaCascader },
 
-  computed: {    
+  computed: {
     // 字段绑定的 v-model
     modelValue: {
       get() {
@@ -202,6 +240,9 @@ export default {
       }
       if (['select', 'radio', 'date', 'month', 'year', 'area', 'cascader'].includes(this.props.type)) {
         return `请选择${this.props.label}`;
+      }
+      if (this.props.placeholder === false) {
+        return
       }
       return `请输入${this.props.label}`;
     },
@@ -247,13 +288,18 @@ export default {
       return this.props.maxLength || 100;
     },
 
+    // 是否禁用状态
+    disabled() {
+      return this.props.disabled === true;
+    },
+
     // 数字输入框的 formatter 属性
     formatter() {
       return (value) => {
         if (typeof this.props.formatter === 'function') {
           return this.props.formatter(value);
         } else if (this.props.amount) { // 金额类型的数字输入框
-          return `￥ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+          return `￥ `+(`${value}`.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')?.replace(/\B(?=(\d{3})+(?!\d))/g, ','))
         }
         return value;
       };
@@ -270,7 +316,7 @@ export default {
         return value;
       };
     },
-    
+
   },
 
   methods: {
