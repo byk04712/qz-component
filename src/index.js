@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-01-14 16:38:13
+ * @LastEditTime: 2022-02-16 16:32:28
  * @Description: 组件入口文件
  * @FilePath: \bgy-component\src\index.js
  */
@@ -17,6 +17,7 @@ import Throttle from '../packages/throttle/index'
 import amount from './filters/amount'
 import modal from './directives/modal'
 import throttle from './directives/throttle'
+import axiosPlugin from './plugins/axios'
 
 const components = [
   Form,
@@ -29,18 +30,25 @@ const components = [
 ]
 
 const install = (Vue, options = {}) => {
+  const {
+    size,
+    axiosConfig
+  } = options
+
   // 注册组件
   components.forEach(component => {
     Vue.component(component.name, component)
   })
   // 过滤器
   Vue.filter('amount', amount)
+  // 插件
+  Vue.use(axiosPlugin, axiosConfig)
   // 指令
   Vue.directive('modal', modal)
   Vue.directive('throttle', throttle)
   // 组件选项
   Vue.prototype.$BGY = {
-    size: options.size || 'default'
+    size: size || 'default'
   }
 }
 
