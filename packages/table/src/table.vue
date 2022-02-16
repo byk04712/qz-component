@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-10-28 17:48:32
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-15 09:51:40
+ * @LastEditTime: 2022-02-16 14:20:10
  * @Description: 数据表格
  * @FilePath: \bgy-component\packages\table\src\table.vue
 -->
@@ -272,13 +272,13 @@ export default {
       };
 
       this.$http[this.ajaxMethod || 'post'](this.requestUrl, requestParams)
-        .then(res => {
+        .then(({ data }) => {
           const {
             records = [],
             current,
             size: pageSize,
             total,
-          } = res.data?.obj || {};
+          } = data.obj || {};
           Object.assign(this.pager, {
             current,
             pageSize,

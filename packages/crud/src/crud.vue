@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 11:16:31
+ * @LastEditTime: 2022-02-16 14:20:09
  * @Description: CRUD 组件
  * @FilePath: \bgy-component\packages\crud\src\crud.vue
 -->
@@ -809,13 +809,13 @@ export default {
 
       this.$http
         .post(this.requestUrl, requestParams)
-        .then(res => {
+        .then(({ data }) => {
           const {
             records = [],
             current,
             size: pageSize,
             total,
-          } = res.data?.obj || {};
+          } = data.obj || {};
           Object.assign(this.pager, {
             current,
             pageSize,
