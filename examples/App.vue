@@ -14,13 +14,11 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from '@vue/composition-api'
 import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN'
 
-export default defineComponent({
+export default {
   name: 'App',
-  setup() {
-
+  data() {
     const componentList = [
       {
         name: 'FormTest',
@@ -39,25 +37,25 @@ export default defineComponent({
         component: () => import('./src/pages/ThrottleTest.vue')
       },
     ]
-
-    const current = reactive({ ...componentList[0] })
-
-    const onChange = (name) => {
-      const cur = componentList.find(e => e.name === name)
-      Object.assign(current, {
-        name,
+    return {
+      componentList,
+      current: componentList[0],
+    }
+  },
+  computed: {
+    locale() {
+      return zh_CN
+    }
+  },
+  methods: {
+    onChange(name) {
+      const cur = this.componentList.find(e => e.name === name)
+      Object.assign(this.current, {
         component: cur.component,
       })
     }
-
-    return {
-      locale: zh_CN,
-      componentList,
-      current,
-      onChange
-    }
   }
-})
+}
 </script>
 
 <style>

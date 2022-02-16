@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2022-02-14 14:58:12
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-14 16:59:25
+ * @LastEditTime: 2022-02-16 10:33:24
  * @Description: 
  * @FilePath: \bgy-component\examples\src\pages\FormTest.vue
 -->
@@ -13,13 +13,11 @@
 </template>
 
 <script>
-import { defineComponent, reactive, watch, watchEffect } from '@vue/composition-api'
-
-export default defineComponent({
+export default {
   name: 'FormTest',
-  setup() {
-    const formData = reactive({})
-    const formConfig = reactive({
+  data() {
+    const formData = {}
+    const formConfig = {
       // labelCol: { span: 6 }, // 默认
       // wrapperCol: { span: 18 }, // 默认
       rowSize: 2, // 每行展示2个字段，默认为 1
@@ -292,16 +290,12 @@ export default defineComponent({
           ],
         },
       ]
-    })
-
-    // watchEffect(() => {
-    //   console.log('watch rowSize', formData)
-    // })
+    }
 
     return {
       formConfig,
       formData
     }
   }
-})
+}
 </script>

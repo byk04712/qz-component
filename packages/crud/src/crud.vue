@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-15 09:29:02
+ * @LastEditTime: 2022-02-15 11:33:18
  * @Description: CRUD 组件
  * @FilePath: \bgy-component\packages\crud\src\crud.vue
 -->
@@ -231,7 +231,7 @@ import BgyItemRange from '../../item-range';
 import download from '../../../src/util/download';
 import SelectionMixin from '../../../src/mixins/selection';
 import FormMixin from '../../../src/mixins/form';
-import ModalImport from './modalImport';
+import ModalImport from './modalImport.vue';
 
 const [
   ACTION_ADD,

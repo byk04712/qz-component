@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2022-01-26 17:02:22
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-14 14:58:16
+ * @LastEditTime: 2022-02-16 10:29:19
  * @Description: 
  * @FilePath: \bgy-component\examples\src\pages\CrudTest.vue
 -->
@@ -13,12 +13,10 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from '@vue/composition-api'
-
-export default defineComponent({
+export default {
   name: 'CrudTest',
-  setup() {
-    const crudConfig = reactive({
+  data() {
+    const crudConfig = {
       // 分页接口
       requestUrl: 'basic/basic/contract/pageList',
       // 搜索字段
@@ -147,10 +145,10 @@ export default defineComponent({
           width: 120
         }
       ]
-    })
+    }
     return {
       crudConfig
     }
   }
-})
+}
 </script>

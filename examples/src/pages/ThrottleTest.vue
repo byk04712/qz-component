@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2022-01-18 10:07:50
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-01-18 10:09:27
+ * @LastEditTime: 2022-02-16 10:28:57
  * @Description: 防抖
- * @FilePath: \bgy-component\examples\src\ThrottleTest.vue
+ * @FilePath: \bgy-component\examples\src\pages\ThrottleTest.vue
 -->
 
 <template>
@@ -24,32 +24,26 @@
 </template>
 
 <script>
-import { defineComponent, ref } from '@vue/composition-api'
 import { message } from 'ant-design-vue'
 
-export default defineComponent({
+export default {
   name: 'Playground',
-  setup() {
-    const count = ref(0);
-
-    const onClickA = () => {
-      message.info(count.value)
-      count.value++
-    }
-    const onClickB = () => {
-      count.value--
-    }
-
-    const log = info => {
-      console.log(info)
-    }
-    
+  data() {
     return {
-      count,
-      log,
-      onClickA,
-      onClickB
+      count: 0
     }
   },
-})
+  methods: {
+    onClickA() {
+      message.info(count.value)
+      count++
+    },
+    onClickB() {
+      this.count--
+    },
+    log(info) {
+      console.log(info)
+    }
+  }
+}
 </script>

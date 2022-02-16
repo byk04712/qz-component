@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-10-25 17:20:38
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 11:12:36
+ * @LastEditTime: 2022-02-16 11:00:29
  * @Description: 区间范围
- * @FilePath: \admin-fronted\bgy-component\packages\item-range\src\item-range.vue
+ * @FilePath: \bgy-component\packages\item-range\src\item-range.vue
 -->
 <template>
   <div class="bgy-item-range">
@@ -212,6 +212,15 @@ export default {
     // 是否允许清除
     allowClear() {
       return this.props.allowClear !== false;
+    },
+
+    // 是否禁用状态
+    disabled() {
+      if (Array.isArray(this.props.disabled)) {
+        const [beginDisabled = false, endDisabled = false] = this.props.disabled;
+        return [beginDisabled, endDisabled];
+      }
+      return this.props.disabled === true;
     },
 
     // 输入框提示信息
