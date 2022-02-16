@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-10-25 16:45:06
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-09 20:18:32
+ * @LastEditTime: 2022-02-16 11:43:19
  * @Description: 输入项
- * @FilePath: \admin-fronted\src\components\item\index.vue
+ * @FilePath: \bgy-component\packages\item\src\item.vue
 -->
 <template>
   <div class="bgy-item">
@@ -299,7 +299,7 @@ export default {
         if (typeof this.props.formatter === 'function') {
           return this.props.formatter(value);
         } else if (this.props.amount) { // 金额类型的数字输入框
-          return `￥ `+(`${value}`.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')?.replace(/\B(?=(\d{3})+(?!\d))/g, ','))
+          return `￥ `+(`${value}`.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1').replace(/\B(?=(\d{3})+(?!\d))/g, ','))
         }
         return value;
       };
