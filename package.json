@@ -29,10 +29,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/byk04712/bgy-component.git"
+    "url": "http://39.108.40.223:666/xuxuan02/component-lib.git"
   },
   "bugs": {
-    "url": "https://github.com/view-design/ViewUI/issues"
+    "url": "http://39.108.40.223:666/xuxuan02/component-lib/-/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.17.2",
