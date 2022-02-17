@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 16:32:28
+ * @LastEditTime: 2022-02-16 17:01:29
  * @Description: 组件入口文件
  * @FilePath: \bgy-component\src\index.js
  */
@@ -31,7 +31,7 @@ const components = [
 
 const install = (Vue, options = {}) => {
   const {
-    size,
+    size = 'default',
     axiosConfig
   } = options
 
@@ -48,7 +48,7 @@ const install = (Vue, options = {}) => {
   Vue.directive('throttle', throttle)
   // 组件选项
   Vue.prototype.$BGY = {
-    size: size || 'default'
+    size
   }
 }
 

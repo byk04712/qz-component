@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2022-02-16 16:06:50
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 16:38:31
+ * @LastEditTime: 2022-02-17 09:15:51
  * @Description: Axios封装
  * @FilePath: \bgy-component\src\plugins\axios.js
  */
@@ -16,7 +16,7 @@ const DEFAULT_CONFIG = {
   xsrfCookieName: "Authorization",
 }
 
-const AxiosPlugin = {
+export default {
   install(Vue, options = DEFAULT_CONFIG) {
     if (Vue.prototype.$http) {
       return
@@ -48,5 +48,3 @@ const AxiosPlugin = {
     })
   }
 }
-
-export default AxiosPlugin
