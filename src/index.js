@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-10 15:36:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 17:01:29
+ * @LastEditTime: 2022-02-18 11:47:17
  * @Description: 组件入口文件
  * @FilePath: \bgy-component\src\index.js
  */
@@ -31,13 +31,13 @@ const components = [
 
 const install = (Vue, options = {}) => {
   const {
-    size = 'default',
+    // size = 'default',
     axiosConfig
   } = options
 
   // 注册组件
   components.forEach(component => {
-    Vue.component(component.name, component)
+    Vue.use(component)
   })
   // 过滤器
   Vue.filter('amount', amount)
@@ -46,13 +46,9 @@ const install = (Vue, options = {}) => {
   // 指令
   Vue.directive('modal', modal)
   Vue.directive('throttle', throttle)
-  // 组件选项
-  Vue.prototype.$BGY = {
-    size
-  }
 }
 
-export default {
+export {
   // 组件库版本
   version,
 
@@ -60,5 +56,16 @@ export default {
   install,
 
   // 组件
-  ...components
+  Form,
+  Item,
+  ItemRange,
+  Split,
+  Table,
+  Crud,
+  Throttle
+}
+
+export default {
+  version,
+  install
 }
