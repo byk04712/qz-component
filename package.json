@@ -2,20 +2,22 @@
   "name": "bgy-component",
   "version": "0.0.1",
   "description": "Vue2.x + Vite2.x + TypeScript 基于 Ant Design for Vue 封装通用组件库",
-  "main": "dist/index.esm.js",
-  "module": "dist/index.bundle.js",
+  "main": "dist/index.es.js",
+  "module": "dist/index.es.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "dev": "vite",
     "serve": "vite preview",
     "build": "rollup -c && npm run build:style && vue-tsc --noEmit && vite build",
-    "build:style": "gulp --gulpfile build/build-style.js"
+    "build:style": "gulp --gulpfile build/build-style.js",
+    "postinstall": "node scripts/postinstall"
   },
   "files": [
     "packages",
     "src",
     "types",
-    "dist"
+    "dist",
+    "scripts"
   ],
   "keywords": [
     "vue",
@@ -58,13 +60,15 @@
     "vue-tsc": "^0.29.8"
   },
   "dependencies": {
-    "ant-design-vue": "^1.7.8",
+    "moment": "^2.29.1",
     "axios": "^0.20.0",
     "lodash.clonedeep": "^4.5.0",
-    "moment": "^2.29.1",
-    "throttle-debounce": "^3.0.1",
-    "vue": "^2.6.14",
-    "vue-template-compiler": "^2.6.14"
+    "throttle-debounce": "^3.0.1"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.0",
+    "vue-template-compiler": "^2.6.0",
+    "ant-design-vue": "^1.7.8"
   },
   "standard": {
     "ignore": []

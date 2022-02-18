@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2022-01-18 10:07:50
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 10:28:57
+ * @LastEditTime: 2022-02-17 15:44:44
  * @Description: 防抖
  * @FilePath: \bgy-component\examples\src\pages\ThrottleTest.vue
 -->
@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     onClickA() {
-      message.info(count.value)
-      count++
+      message.info(this.count)
+      this.count++
     },
     onClickB() {
       this.count--

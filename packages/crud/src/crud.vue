@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 14:20:09
+ * @LastEditTime: 2022-02-17 15:59:05
  * @Description: CRUD 组件
  * @FilePath: \bgy-component\packages\crud\src\crud.vue
 -->
@@ -124,22 +124,17 @@
         </div>
         <!-- 操作栏右边 -->
         <a-space class="bgy-crud-action--right">
-          <!--
-          <throttle
+          <bgy-throttle
             v-for="(item, i) of actionButtonList"
             :key="i"
           >
-           -->
             <a-button
-              v-for="(item, i) of actionButtonList"
-              :key="i"
               v-bind="item"
-              v-throttle.click="handleActionClick(item)"
+              @click.native="handleActionClick(item)"
             >
-              <!-- @click.native="handleActionClick(item)" -->
               {{ item.label }}
             </a-button>
-          <!-- </throttle> -->
+          </bgy-throttle>
         </a-space>
       </a-space>
       <!-- 数据展示 -->
@@ -225,7 +220,7 @@
 
 <script>
 import { debounce } from 'throttle-debounce';
-// import Throttle from '@/components/throttle';
+import BgyThrottle from '../../throttle';
 import BgyItem from '../../item';
 import BgyItemRange from '../../item-range';
 import download from '../../../src/util/download';
@@ -288,7 +283,7 @@ export default {
   mixins: [SelectionMixin, FormMixin],
 
   components: {
-    // Throttle,
+    BgyThrottle,
     ModalImport,
     BgyItem,
     BgyItemRange,
