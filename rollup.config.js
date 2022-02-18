@@ -16,7 +16,7 @@ import { terser } from 'rollup-plugin-terser'
 const es = {
   input: './src/index.js',
   output: {
-    file: 'dist/index.esm.js',
+    file: 'dist/index.es.js',
     name: 'BgyComponent',
     format: 'es',
     globals: {
