@@ -10,8 +10,6 @@
     "serve": "vite preview",
     "build": "rollup -c && npm run build:style && vue-tsc --noEmit && vite build",
     "build:style": "gulp --gulpfile build/build-style.js",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
     "postinstall": "node scripts/postinstall"
   },
   "files": [
@@ -59,8 +57,7 @@
     "typescript": "^4.5.5",
     "vite": "^2.8.1",
     "vite-plugin-vue2": "^1.9.3",
-    "vue-tsc": "^0.29.8",
-    "vuepress": "^1.9.7"
+    "vue-tsc": "^0.29.8"
   },
   "dependencies": {
     "moment": "^2.29.1",
