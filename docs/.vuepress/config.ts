@@ -73,6 +73,10 @@ export default defineConfig({
         path: '/guide/getting-started'
       },
       {
+        title: '国际化',
+        path: '/guide/i18n'
+      },
+      {
         title: '组件',
         collapsable: false,
         path: '/component/crud/',

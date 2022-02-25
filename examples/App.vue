@@ -21,12 +21,12 @@ export default {
   data() {
     const componentList = [
       {
-        name: 'FormTest',
-        component: () => import('./src/pages/FormTest.vue')
-      },
-      {
         name: 'CrudTest',
         component: () => import('./src/pages/CrudTest.vue')
+      },
+      {
+        name: 'FormTest',
+        component: () => import('./src/pages/FormTest.vue')
       },
       {
         name: 'Playground',

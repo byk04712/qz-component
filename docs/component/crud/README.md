@@ -16,6 +16,8 @@ export default {
       crudConfig: {
         // 分页接口
         requestUrl: 'https://www.fastmock.site/mock/eb7f9e535c90fdde70880b7e088fca31/api/employee/pagination',
+        // 是否显示序号，默认 false
+        showOrder: true,
         // 搜索字段
         searchItem: [
           {
@@ -31,11 +33,6 @@ export default {
             width: 120
           },
           {
-            dataIndex: 'title',
-            title: '标题',
-            width: 120
-          },
-          {
             dataIndex: 'name',
             title: '姓名',
             width: 120
@@ -48,23 +45,12 @@ export default {
           {
             dataIndex: 'email',
             title: '邮箱地址',
-            width: 120
+            width: 180
           },
           {
             dataIndex: 'date',
             title: '日期',
-            width: 120
-          },
-          {
-            dataIndex: 'slogo',
-            title: '标语',
-            width: 120
-          },
-          {
-            dataIndex: 'intro',
-            title: '简介',
-            width: 120,
-            ellipsis: true,
+            width: 180
           },
         ]
       }
