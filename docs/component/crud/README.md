@@ -21,8 +21,19 @@ export default {
         // 搜索字段
         searchItem: [
           {
-            label: '颜色',
+            key: 'name',
+            label: '姓名',
             type: 'text'
+          },
+          {
+            key: 'age',
+            label: '年龄段',
+            type: 'select',
+            options: [
+              { label: '18 以下', value: '< 18' },
+              { label: '18 ~ 40 之间', value: '18-40' },
+              { label: '40 以上', value: '> 40' }
+            ]
           },
         ],
         // 数据列
@@ -45,7 +56,13 @@ export default {
           {
             dataIndex: 'email',
             title: '邮箱地址',
-            width: 180
+            width: 200
+          },
+          {
+            dataIndex: 'slogo',
+            title: '座右铭',
+            width: 200,
+            ellipsis: true
           },
           {
             dataIndex: 'date',
