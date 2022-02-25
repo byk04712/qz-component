@@ -1,22 +1,16 @@
-/*
- * @Author: 秦真
- * @Date: 2022-02-24 15:20:40
- * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-24 17:39:50
- * @Description: 
- * @FilePath: /bgy-component/docs/.vuepress/config.ts
- */
-import { resolve } from 'path'
 import {  defineConfig} from 'vuepress/config'
 
+const port = 8080
+
 export default defineConfig({
+  port,
   title: 'BgyComponent',
   description: '基于 Ant Design Vue 封装，快速开发中后台系统页面',
 
   head: [['link', { rel: 'icon', href: '/images/favicon.ico' }]],
 
   // 主题和它的配置
-  // theme: '@vuepress/theme-default',
+  theme: '@vuepress/theme-default',
   themeConfig: {
     logo: '/images/logo.png',
 
@@ -105,16 +99,10 @@ export default defineConfig({
       }
     ]
   },
+  // markdown配置
   markdown: {
     lineNumbers: true
   },
-  plugins: [
-    [
-      '@vuepress/register-components',
-      {
-        componentsDir: resolve(__dirname, 'src/index.js')
-      }
-    ],
-    'demo-container'
-  ]
+  // 插件配置
+  plugins: ['demo-container']
 })
