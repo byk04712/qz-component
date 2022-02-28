@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-09-13 23:35:59
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-09-15 08:08:51
+ * @LastEditTime: 2022-02-28 15:13:25
  * @Description: Modal框自定义指令
- * @FilePath: /nhzl-admin-frontend/src/directives/modal.js
+ * @FilePath: \bgy-component\src\directives\modal.js
  */
 import Vue from 'vue';
 
@@ -14,7 +14,7 @@ function onFullscreen(modalEl) {
   const contentEl = modalEl.querySelector('.ant-modal-content');
 
   if (!contentEl) return;
-  
+
   // Modal头部DOM
   const headerEl = contentEl.querySelector('.ant-modal-header');
   // Modal底部DOM
@@ -36,7 +36,7 @@ function onFullscreen(modalEl) {
 function onDrag(el, binding, vnode) {
   const modalEl = el.querySelector('.ant-modal');
   if (!modalEl) return;
-  
+
   // Modal内容
   const contentEl = modalEl.querySelector('.ant-modal-content');
 
@@ -102,7 +102,7 @@ export default {
       }
     } = binding;
 
-    // 值为false则不处理 
+    // 值为false则不处理
     if (!value) return;
 
     const modalEl = el.querySelector('.ant-modal');

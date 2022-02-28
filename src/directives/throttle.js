@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2021-11-15 22:55:24
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-01-14 17:53:45
+ * @LastEditTime: 2022-02-28 15:29:05
  * @Description: 事件防抖指令
  * @FilePath: \bgy-component\src\directives\throttle.js
  */
@@ -72,7 +72,7 @@ export default {
 
     events.forEach((eventName) => {
       const handlerFunction = throttle(value, Number(arg), true, vnode, true)
-      
+
       el.addEventListener(eventName, handlerFunction)
     })
   }

@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-10-28 14:53:57
  * @LastEditors: Do not edit
- * @LastEditTime: 2021-11-15 15:36:37
+ * @LastEditTime: 2022-02-28 14:43:34
  * @Description: 表单
- * @FilePath: \admin-fronted\bgy-component\packages\form\src\form.vue
+ * @FilePath: \bgy-component\packages\form\src\form.vue
 -->
 <template>
   <div class="bgy-form">
@@ -346,7 +346,7 @@ export default {
           // 校验失败，往外抛事件
           this.$emit('validateError', faildFields);
         }
-      });      
+      });
     },
 
     // a-form-model-item 的 label-col 属性

@@ -79,17 +79,21 @@ export default defineConfig({
       {
         title: '组件',
         collapsable: false,
-        path: '/component/crud/',
+        path: '/component/crud',
         children: [
-          ['/component/crud/', 'crud'],
-          ['/component/item/', 'item']
+          ['/component/crud', 'crud'],
+          ['/component/form', 'form'],
+          ['/component/item', 'item']
         ]
       },
       {
         title: '指令',
         collapsable: false,
         path: '/directive/modal',
-        children: [['/directive/modal', 'v-modal']]
+        children: [
+          ['/directive/modal', 'v-modal'],
+          ['/directive/throttle', 'v-throttle']
+        ]
       },
       {
         title: '过滤器',
