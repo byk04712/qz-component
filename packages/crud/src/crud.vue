@@ -2,7 +2,7 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-27 09:02:47
+ * @LastEditTime: 2022-02-28 23:12:26
  * @Description: CRUD 组件
  * @FilePath: \bgy-component\packages\crud\src\crud.vue
 -->
@@ -804,7 +804,7 @@ export default {
 
       this.$http
         .post(this.requestUrl, requestParams)
-        .then(({ data }) => {
+        .then(({ data = {} }) => {
           const {
             records = [],
             current,

@@ -9,6 +9,7 @@ import vuePlugin from 'rollup-plugin-vue'
 import commomjs from 'rollup-plugin-commonjs'
 // 代码压缩插件
 import { terser } from 'rollup-plugin-terser'
+import pkg from './package.json'
 
 const argv = require('minimist')(process.argv.slice(2))
 
@@ -17,7 +18,7 @@ const isDev = argv.dev || false
 
 const input = 'src/index.js'
 const name = 'BgyComponent'
-const external = ['vue', 'ant-design-vue', 'moment', 'axios', 'throttle-debounce', 'lodash.clonedeep', 'core-js']
+const external = ['vue', 'ant-design-vue', 'moment', 'axios', 'throttle-debounce', 'core-js']
 const plugins = [
   resolve(),
   commomjs(),
@@ -29,11 +30,18 @@ const plugins = [
   json(),
   vuePlugin({ css: true })
 ]
+const banner = `/*!
+ * ${pkg.name} v${pkg.version}
+ * @Author: ${pkg.author}
+ * @Date: ${new Date().toUTCString()}
+ * @License MIT
+ */`
 
 // 非开发模式下进行代码压缩处理，减少打包体积
 if (!isDev) {
   plugins.push(terser())
 }
+
 
 
 // esm – 将软件包保存为 ES 模块文件，在现代浏览器中可以通过 <script type=module> 标签引入
@@ -42,7 +50,8 @@ const esm = {
   output: {
     file: 'dist/index.esm-bundler.js',
     name,
-    format: 'esm'
+    format: 'esm',
+    banner
   },
   // 指出应将哪些模块视为外部模块，不会与你的库打包在一起
   external,
@@ -62,10 +71,10 @@ const iife = {
       vue: 'Vue',
       'ant-design-vue': 'antd',
       moment: 'moment',
-      'lodash.clonedeep': '_.clonedeep',
       axios: 'axios',
       'throttle-debounce': 'throttle-debounce'
-    }
+    },
+    banner
   },
   // 指出应将哪些模块视为外部模块，不会与你的库打包在一起
   external,
@@ -85,10 +94,10 @@ const umd = {
       vue: 'Vue',
       'ant-design-vue': 'antd',
       moment: 'moment',
-      'lodash.clonedeep': '_.clonedeep',
       axios: 'axios',
       'throttle-debounce': 'throttle-debounce'
-    }
+    },
+    banner
   },
   // 指出应将哪些模块视为外部模块，不会与你的库打包在一起
   external,
@@ -102,7 +111,8 @@ const cjs = {
     file: 'dist/index.cjs.js',
     name,
     format: 'cjs',
-    exports: 'named'
+    exports: 'named',
+    banner
   },
   // 指出应将哪些模块视为外部模块，不会与你的库打包在一起
   external,
@@ -116,7 +126,8 @@ const amd = {
     file: 'dist/index.amd.js',
     name,
     format: 'amd',
-    exports: 'named'
+    exports: 'named',
+    banner
   },
   // 指出应将哪些模块视为外部模块，不会与你的库打包在一起
   external,
@@ -129,7 +140,8 @@ const system = {
   output: {
     file: 'dist/index.system.js',
     name,
-    format: 'system'
+    format: 'system',
+    banner
   },
   // 指出应将哪些模块视为外部模块，不会与你的库打包在一起
   external,

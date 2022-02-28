@@ -2,12 +2,11 @@
  * @Author: 秦真
  * @Date: 2021-11-08 10:17:55
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-28 22:44:18
+ * @LastEditTime: 2022-02-28 23:27:10
  * @Description: 表单混入
  * @FilePath: \bgy-component\src\mixins\form.js
  */
-import deepClone from 'lodash.clonedeep';
-
+import { deepClone } from '../../src/util/utils'
 
 /**
  * 构造完整的 rule 项
@@ -95,8 +94,8 @@ export default {
         // 区间输入框， 默认值为数组类型， [起始字段默认值， 结束字段默认值]
         if (item.range) {
           const [beginVal, endVal] = item.value || [];
-          this.$set(acc, item.begin, acc[item.begin] || beginVal);
-          this.$set(acc, item.end, acc[item.end] || endVal);
+          this.$set(acc, item.begin, acc[item.begin] ?? beginVal);
+          this.$set(acc, item.end, acc[item.end] ?? endVal);
         } else if (['area'].includes(item.type)) {
           // area 字段类型时， key值可以支持多个， 使用 ^ 分隔
           if (item.key.indexOf('^') > -1) {
@@ -111,7 +110,7 @@ export default {
               }
             });
           } else {
-            this.$set(acc, item.key, acc[item.key] || item.value);
+            this.$set(acc, item.key, acc[item.key] ?? item.value);
           }
         } else if (['number'].includes(item.type) && typeof item.amount === 'number') {
           const scale = item.amount || 1; // 金额单位默认为元
@@ -121,7 +120,7 @@ export default {
             this.$set(acc, item.key, item.value / scale);
           }
         } else {
-          this.$set(acc, item.key, acc[item.key] || item.value);
+          this.$set(acc, item.key, acc[item.key] ?? item.value);
         }
         return acc;
       }, { ...formData });
