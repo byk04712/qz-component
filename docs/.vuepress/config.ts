@@ -83,7 +83,10 @@ export default defineConfig({
         children: [
           ['/component/crud', 'crud'],
           ['/component/form', 'form'],
-          ['/component/item', 'item']
+          ['/component/item', 'item'],
+          ['/component/item-range', 'itemRange'],
+          ['/component/table', 'table'],
+          ['/component/split', 'split']
         ]
       },
       {

@@ -1,15 +1,16 @@
-# item 表单字段项组件
+# item-range 范围区间组件
 
-Crud 组件查询字段，Form 组件字段均使用到了 Item, 和 [ItemRange](/component/item-range.html)
+
+Crud 组件查询字段，Form 组件字段均使用到了 [Item](/component/item.html), 和 ItemRange
+
 ### 示例
-
 
 ::: demo
 ```vue
 <template>
   <div>
-    <bgy-item :props="props1" v-model="value1"></bgy-item>
-    <bgy-item :props="props2" v-model="value2"></bgy-item>
+    <bgy-item-range :props="props1" v-model="value1"></bgy-item-range>
+    <bgy-item-range :props="props2" v-model="value2"></bgy-item-range>
   </div>
 </template>
 <script>
@@ -17,24 +18,21 @@ export default {
   data() {
     return {
       props1: {
-        type: 'text',
-        key: 'name',
+        begin: 'monthBegin',
+        end: 'monthEnd',
+        type: 'month',
+        range: true
       },
-      value1: 'hi',
+      value1: [],
 
       props2: {
-        key: 'checkbox',
-        type: 'checkbox',
-        options: [
-          { label: '唱歌', value: 'sing' },
-          { label: '看书', value: 'read' },
-          { label: '旅游', value: 'trip' },
-          { label: '篮球', value: 'basketball' },
-          { label: '拍照', value: 'photo' },
-          { label: '睡觉', value: 'sleep' }
-        ]
+        begin: 'dateBeginStage',
+        end: 'dateEndStage',
+        type: 'date',
+        range: true,
+        stage: true
       },
-      value2: ['trip', 'sleep']
+      value2: []
     }
   }
 }
@@ -53,3 +51,7 @@ export default {
 |format|展示格式化，仅在 `type` 为 `date`，`month`， `year` 时有效|string|-|当 `type` 为 `date`时 默认 `YYYY-MM-DD`<br/>当 `type` 为 `moth`时 默认 `YYYY-MM`<br/>当 `type` 为 `year`时 默认 `YYYY`|
 |valueFormat|值格式化，仅在 `type` 为 `date`，`month`， `year` 时有效|string|-|当 `type` 为 `date`时 默认 `YYYY-MM-DD`<br/>当 `type` 为 `moth`时 默认 `YYYY-MM`<br/>当 `type` 为 `year`时 默认 `YYYY`|
 |maxLength|最大可输入长度|number|-|100|
+|stage|是否为开区间（开始/结束字段可为空），默认是闭区间。仅在 `range` 为 `true` 时有效|boolean|-|false|
+|separator|区间字段之间的分隔符号。仅在 `range` 为 `true` 时有效|string|-|~|
+|begin|区间类型起始字段查询时传给后端的参数名。仅在 `range` 为 `true` 时有效|string|-|-|
+|end|区间类型结束字段查询时传给后端的参数名。仅在 `range` 为 `true` 时有效|string|-|-|

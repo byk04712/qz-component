@@ -6,7 +6,7 @@
 ::: demo
 ```vue
 <template>
-  <a-space>
+  <a-space direction="vertical">
     <div>{{ 123456 | amount }}</div>
 
     <!-- 保留小数点后5位 -->
