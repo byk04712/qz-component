@@ -2,14 +2,14 @@
   "name": "bgy-component",
   "version": "0.0.1",
   "description": "Vue2.x + Vite2.x + TypeScript 基于 Ant Design for Vue 封装通用组件库",
-  "main": "dist/index.es.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.global.js",
+  "module": "dist/index.esm-bundler.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "dev": "vite",
     "serve": "vite preview",
     "build": "rollup -c && npm run build:style && vue-tsc --noEmit && vite build",
-    "build:style": "gulp --gulpfile build/build-style.js",
+    "build:style": "gulp",
     "postinstall": "node scripts/postinstall",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
@@ -48,7 +48,9 @@
     "gulp-less": "^5.0.0",
     "gulp-postcss": "^9.0.1",
     "less": "^4.1.2",
+    "minimist": "^1.2.5",
     "postcss-px2rem": "^0.3.0",
+    "rollup": "^2.68.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-vue": "^5.1.9",
@@ -70,7 +72,6 @@
     "throttle-debounce": "^3.0.1"
   },
   "peerDependencies": {
-    "ant-design-vue": "^1.7.8",
     "vue": "^2.6.0",
     "vue-template-compiler": "^2.6.0"
   },
