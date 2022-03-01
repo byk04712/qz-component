@@ -2,9 +2,9 @@
  * @Author: 秦真
  * @Date: 2021-10-25 16:45:06
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-16 11:43:19
+ * @LastEditTime: 2022-03-01 16:37:49
  * @Description: 输入项
- * @FilePath: \bgy-component\packages\item\src\item.vue
+ * @FilePath: \ant-design-adminc:\Users\qinzhen09\workspace\bgy-component\packages\item\src\item.vue
 -->
 <template>
   <div class="bgy-item">
@@ -205,7 +205,23 @@ export default {
     },
 
     // v-model
-    value: [String, Number, Array, Object, Boolean],
+    value: {
+      type: [String, Number, Array, Object, Boolean],
+      default: function() {
+        if (Object.prototype.hasOwnProperty.call(this.props, 'type')) {
+          console.log(this.props.type)
+          switch (this.props.type) {
+            case 'text':
+              return ''
+            case 'switch':
+              return false
+            case 'checkbox':
+              return []
+          }
+        }
+        return undefined
+      }
+    },
   },
 
   data() {
@@ -238,13 +254,18 @@ export default {
       if (this.props.placeholder) {
         return this.props.placeholder;
       }
-      if (['select', 'radio', 'date', 'month', 'year', 'area', 'cascader'].includes(this.props.type)) {
-        return `请选择${this.props.label}`;
+      const {
+        label = '',
+        type,
+        placeholder
+      } = this.props
+      if (['select', 'radio', 'date', 'month', 'year', 'area', 'cascader'].includes(type)) {
+        return `请选择${label}`;
       }
-      if (this.props.placeholder === false) {
-        return
+      if (placeholder === false) {
+        return ''
       }
-      return `请输入${this.props.label}`;
+      return `请输入${label}`;
     },
 
     // 是否允许清除

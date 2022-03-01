@@ -21,16 +21,16 @@ export default {
   data() {
     const componentList = [
       {
+        name: 'Playground',
+        component: () => import('./src/pages/Playground.vue')
+      },
+      {
         name: 'CrudTest',
         component: () => import('./src/pages/CrudTest.vue')
       },
       {
         name: 'FormTest',
         component: () => import('./src/pages/FormTest.vue')
-      },
-      {
-        name: 'Playground',
-        component: () => import('./src/pages/Playground.vue')
       },
       {
         name: 'ThrottleTest',
