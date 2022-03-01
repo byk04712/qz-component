@@ -36,6 +36,7 @@ const banner = `/*!
  * @Date: ${new Date().toUTCString()}
  * @License MIT
  */`
+const createFileName = name => `dist/index.${name}.js`
 
 // 非开发模式下进行代码压缩处理，减少打包体积
 if (!isDev) {
@@ -48,7 +49,7 @@ if (!isDev) {
 const esm = {
   input,
   output: {
-    file: 'dist/index.esm-bundler.js',
+    file: createFileName('esm-bundler'),
     name,
     format: 'esm',
     banner
@@ -62,7 +63,7 @@ const esm = {
 const iife = {
   input,
   output: {
-    file: 'dist/index.global.js',
+    file: createFileName('global'),
     name,
     format: 'iife',
     exports: 'named',
@@ -85,7 +86,7 @@ const iife = {
 const umd = {
   input,
   output: {
-    file: 'dist/index.umd.js',
+    file: createFileName('umd'),
     name,
     format: 'umd',
     exports: 'named',
@@ -108,7 +109,7 @@ const umd = {
 const cjs = {
   input,
   output: {
-    file: 'dist/index.cjs.js',
+    file: createFileName('cjs'),
     name,
     format: 'cjs',
     exports: 'named',
@@ -123,7 +124,7 @@ const cjs = {
 const amd = {
   input,
   output: {
-    file: 'dist/index.amd.js',
+    file: createFileName('amd'),
     name,
     format: 'amd',
     exports: 'named',
@@ -138,7 +139,7 @@ const amd = {
 const system = {
   input,
   output: {
-    file: 'dist/index.system.js',
+    file: createFileName('system'),
     name,
     format: 'system',
     banner
