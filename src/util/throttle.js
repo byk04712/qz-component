@@ -6,25 +6,25 @@
  * @Description: 节流防抖
  * @FilePath: /bgy-component/src/util/throttle.js
  */
-export function throttle(
-  delay,                // 延时的时间,单位毫秒
-  noTrailing,              // 如果为 true, callback 将在每次 delay 之后执行,为 false 将在 delay 之后执行
-  callback,           // 回掉函数
-  debounceMode             // 如果为 true, 则在此先执行, 否则之后再执行
+export function throttle (
+  delay, // 延时的时间,单位毫秒
+  noTrailing, // 如果为 true, callback 将在每次 delay 之后执行,为 false 将在 delay 之后执行
+  callback, // 回掉函数
+  debounceMode // 如果为 true, 则在此先执行, 否则之后再执行
 ) {
   let timeoutID
   let cancelled = false
   let lastExec = 0
 
   // 清除已存在的定时任务
-  function clearExistingTimeout() {
+  function clearExistingTimeout () {
     if (timeoutID) {
       clearTimeout(timeoutID)
     }
   }
 
   // 取消下次执行
-  function cancel() {
+  function cancel () {
     clearExistingTimeout()
     cancelled = true
   }
@@ -36,21 +36,21 @@ export function throttle(
     noTrailing = undefined
   }
 
-  function wrapper(...args) {
-    let self = this;
-    let elapsed = Date.now() - lastExec;
+  function wrapper (...args) {
+    const self = this
+    const elapsed = Date.now() - lastExec
 
     if (cancelled) {
       return
     }
 
-    function exec() {
+    function exec () {
       lastExec = Date.now()
       callback.apply(self, args)
     }
 
-    function clear() {
-      timeoutID = undefined;
+    function clear () {
+      timeoutID = undefined
     }
 
     if (debounceMode && !timeoutID) {
@@ -74,6 +74,6 @@ export function throttle(
   return wrapper
 }
 
-export function debounce(delay, atBegin, callback) {
+export function debounce (delay, atBegin, callback) {
   return callback === undefined ? throttle(delay, atBegin, false) : throttle(delay, callback, atBegin !== false)
 }

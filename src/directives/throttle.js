@@ -46,11 +46,11 @@ const throttle = (fn, duration = 50, isDebounce, ctx, immediate) => {
 }
 
 export default {
-  bind(el, binding, vnode) {
+  bind (el, binding, vnode) {
     const {
-      arg = 600,  // 间隔时间
-      value,      // 事件函数
-      modifiers   // 修饰符(事件名作为修饰符,例如 click, dblclick, mousemove 等等)
+      arg = 600, // 间隔时间
+      value, // 事件函数
+      modifiers // 修饰符(事件名作为修饰符,例如 click, dblclick, mousemove 等等)
     } = binding
 
     if (isNaN(arg)) {

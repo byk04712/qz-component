@@ -43,8 +43,6 @@ if (!isDev) {
   plugins.push(terser())
 }
 
-
-
 // esm – 将软件包保存为 ES 模块文件，在现代浏览器中可以通过 <script type=module> 标签引入
 const esm = {
   input,

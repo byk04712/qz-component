@@ -5,7 +5,6 @@ const autoprefixer = require('gulp-autoprefixer')
 const postcss = require('gulp-postcss')
 const px2rem = require('postcss-px2rem')
 
-
 // 创建监听任务
 gulp.task('watch', function () {
   console.log('监听 src/styles/**/*.less 文件变化将自动转为 css')

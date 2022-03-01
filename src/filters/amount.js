@@ -11,9 +11,9 @@ export default function (value, precision = 2) {
     style: 'currency',
     currency: 'CNY',
     minimumFractionDigits: precision
-  };
-  if (!isNaN(value)) {
-    return Number(value).toLocaleString('zh-CN', options);
   }
-  return value;
+  if (!isNaN(value)) {
+    return Number(value).toLocaleString('zh-CN', options)
+  }
+  return value
 }

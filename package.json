@@ -12,7 +12,8 @@
     "build:style": "gulp",
     "postinstall": "node scripts/postinstall",
     "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "docs:build": "vuepress build docs",
+    "lint": "standard --fix"
   },
   "files": [
     "packages",
@@ -87,8 +88,15 @@
   },
   "lint-staged": {
     "*.{ts,js,vue}": [
-      "npm run lint",
+      "npm run test",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "commit-msg": "node scripts/verify-commit.js",
+      "pre-push": "npm run test"
+    }
   }
 }

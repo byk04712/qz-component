@@ -78,7 +78,7 @@ export default {
     this.throttledMap = new Map()
   },
 
-  render() {
+  render () {
     const vnode = this.$slots.default[0] // 获取根元素
     this.eventKeys.forEach((evtName) => {
       const handler = vnode.data.on[evtName] // 获取处理事件

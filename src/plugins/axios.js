@@ -12,12 +12,12 @@ const DEFAULT_CONFIG = {
   baseURL: '/api',
   timeout: 10 * 1000,
   withCredentials: true, // Check cross-site Access-Control
-  xsrfHeaderName: "Authorization",
-  xsrfCookieName: "Authorization",
+  xsrfHeaderName: 'Authorization',
+  xsrfCookieName: 'Authorization'
 }
 
 export default {
-  install(Vue, options = DEFAULT_CONFIG) {
+  install (Vue, options = DEFAULT_CONFIG) {
     if (Vue.prototype.$http) {
       return
     }
@@ -41,7 +41,7 @@ export default {
 
     Object.defineProperties(Vue.prototype, {
       $http: {
-        get() {
+        get () {
           return _axios
         }
       }
