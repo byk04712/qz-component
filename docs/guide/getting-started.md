@@ -54,6 +54,22 @@ yarn config set registry http://10.15.107.221:8081/repository/npm-public/
 npm install bgy-component --save --registry http://10.15.107.221:8081/repository/npm-public/
 ```
 
+## 发布新版本
+> 发布新版本包需要注册到另一个镜像源地址
+::: details 点击查看发布步骤
+```bash
+# 这里建议使用 nrm 来管理镜像源
+# 添加发版镜像源地址，用于发布组件库使用
+nrm add bgy-publish http://10.15.107.221:8081/repository/bgy-npm/
+
+# 添加安装组件库地址
+nrm add bgy-public http://10.15.107.221:8081/repository/npm-public/
+
+# 发版请切换到 nrm use bgy-publish   安装请切换到 nrm use bgy-public
+nrm use bgy-publish
+```
+:::
+
 ## 完整引入
 ```js
 // main.js
