@@ -2,7 +2,7 @@
  * @Author: 秦真
  * @Date: 2022-02-28 23:20:33
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-03-01 09:01:44
+ * @LastEditTime: 2022-03-09 12:29:53
  * @Description: 工具类函数
  * @FilePath: \bgy-component\src\util\utils.js
  */
@@ -12,16 +12,11 @@
  */
 export function deepClone (obj) {
   let objCloned
-  if (Array.isArray(obj)) {
-    objCloned = []
-    for (let i = 0; i < obj.length; i++) {
-      objCloned[i] = deepClone(obj[i])
+  if (typeof obj === 'object' && obj !== null) {
+    objCloned = Array.isArray(obj) ? [] : {}
+    for(let key in obj) {
+      objCloned[key] = deepClone(obj[key])
     }
-  } else if (typeof obj === 'object' && obj !== null) {
-    objCloned = {}
-    Object.getOwnPropertyNames(obj).forEach(item => {
-      objCloned[item] = deepClone(obj[item])
-    })
   } else {
     objCloned = obj
   }
