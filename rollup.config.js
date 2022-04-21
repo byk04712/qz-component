@@ -17,7 +17,7 @@ const argv = require('minimist')(process.argv.slice(2))
 const isDev = argv.dev || false
 
 const input = 'src/index.js'
-const name = 'BgyComponent'
+const name = 'QzComponent'
 const external = ['vue', 'ant-design-vue', 'moment', 'axios', 'throttle-debounce', 'core-js']
 const plugins = [
   resolve(),

@@ -4,10 +4,10 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-28 14:43:34
  * @Description: 表单
- * @FilePath: \bgy-component\packages\form\src\form.vue
+ * @FilePath: \qz-component\packages\form\src\form.vue
 -->
 <template>
-  <div class="bgy-form">
+  <div class="qz-form">
     <a-form-model
       ref="ruleForm"
       :model="formData"
@@ -54,7 +54,7 @@
         </template>
 
         <!-- 区间输入框字段 -->
-        <bgy-item-range
+        <qz-item-range
           v-else-if="item.range"
           :key="item.begin"
           :props="item"
@@ -62,7 +62,7 @@
           :style="getColStyle(item)"
           @rangeChange="handleRangeChange"
         >
-        </bgy-item-range>
+        </qz-item-range>
 
         <!-- 非区间输入框字段 -->
         <a-form-model-item
@@ -77,18 +77,18 @@
           :wrapper-col="getWrapperCol(item)"
           :style="getColStyle(item)"
         >
-          <bgy-item
+          <qz-item
             :props="item"
             v-model="formData[item.key]"
           >
-          </bgy-item>
+          </qz-item>
         </a-form-model-item>
       </template>
       <!-- 提交表单栏 -->
       <a-form-model-item
         v-if="buttonVisible"
         :wrapper-col="actionWrapperCol"
-        class="bgy-form--action"
+        class="qz-form--action"
         :style="`width:${widthPercent}%;text-align:${rowSize > 1 ? 'right' : 'left'}`"
       >
         <a-space>
@@ -112,19 +112,19 @@
 
 <script>
 import { debounce } from 'throttle-debounce';
-import BgyItem from '../../item';
-import BgyItemRange from '../../item-range';
+import QzItem from '../../item';
+import QzItemRange from '../../item-range';
 import SelectionMixin from '../../../src/mixins/selection';
 import FormMixin from '../../../src/mixins/form';
 
 export default {
-  name: 'BgyForm',
+  name: 'QzForm',
 
   mixins: [SelectionMixin, FormMixin],
 
   components: {
-    BgyItem,
-    BgyItemRange,
+    QzItem,
+    QzItemRange,
   },
 
   props: {

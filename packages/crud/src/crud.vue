@@ -4,17 +4,17 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-28 23:12:26
  * @Description: CRUD 组件
- * @FilePath: \bgy-component\packages\crud\src\crud.vue
+ * @FilePath: \qz-component\packages\crud\src\crud.vue
 -->
 <template>
-  <a-spin class="bgy-crud" :spinning="spinning">
+  <a-spin class="qz-crud" :spinning="spinning">
     <!-- 表单搜索区域 -->
     <a-card
       v-if="showSearchFormItem.length"
       :bordered="false"
       size="small"
       title=""
-      class="bgy-crud-search"
+      class="qz-crud-search"
     >
       <!-- 搜索表单 -->
       <a-form-model
@@ -64,14 +64,14 @@
           </template>
 
           <!-- 区间输入框字段 -->
-          <bgy-item-range
+          <qz-item-range
             v-else-if="item.range"
             :key="item.begin"
             :style="getColStyle(item, i)"
             :props="item"
             v-model="searchFormData"
           >
-          </bgy-item-range>
+          </qz-item-range>
 
           <!-- 非区间输入框字段 -->
           <a-form-model-item
@@ -87,16 +87,16 @@
             :ref="item.key"
             :style="getColStyle(item, i)"
           >
-            <bgy-item
+            <qz-item
               :props="item"
               :label-col="item.labelCol || labelCol"
               v-model="searchFormData[item.key]"
             >
-            </bgy-item>
+            </qz-item>
           </a-form-model-item>
         </template>
 
-        <a-form-model-item :wrapper-col="{ span : 24 }" class="bgy-crud-search--action" :style="`width:${widthPercent}%;`">
+        <a-form-model-item :wrapper-col="{ span : 24 }" class="qz-crud-search--action" :style="`width:${widthPercent}%;`">
           <a-space>
             <a-button html-type="submit" type="primary">搜索</a-button>
             <a-button @click="handleReset">重置</a-button>
@@ -114,17 +114,17 @@
       :bordered="false"
       size="small"
       title=""
-      class="bgy-crud-view"
+      class="qz-crud-view"
     >
       <!-- 操作栏目 -->
-      <a-space v-if="actionVisible" align="center" class="bgy-crud-action">
+      <a-space v-if="actionVisible" align="center" class="qz-crud-action">
         <!-- 操作栏左边 -->
-        <div class="bgy-crud-action--left">
+        <div class="qz-crud-action--left">
           <slot name="actionLeft"></slot>
         </div>
         <!-- 操作栏右边 -->
-        <a-space class="bgy-crud-action--right">
-          <bgy-throttle
+        <a-space class="qz-crud-action--right">
+          <qz-throttle
             v-for="(item, i) of actionButtonList"
             :key="i"
           >
@@ -134,7 +134,7 @@
             >
               {{ item.label }}
             </a-button>
-          </bgy-throttle>
+          </qz-throttle>
         </a-space>
       </a-space>
       <!-- 数据展示 -->
@@ -220,9 +220,9 @@
 
 <script>
 import { debounce } from 'throttle-debounce';
-import BgyThrottle from '../../throttle';
-import BgyItem from '../../item';
-import BgyItemRange from '../../item-range';
+import QzThrottle from '../../throttle';
+import QzItem from '../../item';
+import QzItemRange from '../../item-range';
 import download from '../../../src/util/download';
 import SelectionMixin from '../../../src/mixins/selection';
 import FormMixin from '../../../src/mixins/form';
@@ -278,15 +278,15 @@ const actionButtonMap = new Map([
 const actionButtonKeys = [...actionButtonMap.keys()].map(e => e.description);
 
 export default {
-  name: 'BgyCrud',
+  name: 'QzCrud',
 
   mixins: [SelectionMixin, FormMixin],
 
   components: {
-    BgyThrottle,
+    QzThrottle,
     ModalImport,
-    BgyItem,
-    BgyItemRange,
+    QzItem,
+    QzItemRange,
   },
 
   props: {
@@ -654,8 +654,8 @@ export default {
         bodyEl.style.minWidth = `${offsetWidth}px`;
       }
 
-      // const searchHeight = this.$el.querySelector('.bgy-crud-search')?.clientHeight || 0;
-      // const actionHeight = this.$el.querySelector('.bgy-crud-action')?.clientHeight || 0;
+      // const searchHeight = this.$el.querySelector('.qz-crud-search')?.clientHeight || 0;
+      // const actionHeight = this.$el.querySelector('.qz-crud-action')?.clientHeight || 0;
       // const tableHeaderHeight = tableEl.querySelector('.ant-table-thead')?.clientHeight || 0;
       // const paginationHeight = tableEl.querySelector('.ant-table-pagination')?.clientHeight || 0;
 
@@ -675,8 +675,8 @@ export default {
         // this.scroll.y = height - paginationHeight;
 
         // 解决浮动列高度与内容高度错位问题
-        // const fixedHeader = Array.from(document.querySelectorAll('.bgy-crud-view .ant-table .ant-table-fixed-left .ant-table-thead, .bgy-crud-view .ant-table .ant-table-fixed-right .ant-table-thead'));
-        // const headerHeight = document.querySelector('.bgy-crud-view .ant-table .ant-table-thead').clientHeight;
+        // const fixedHeader = Array.from(document.querySelectorAll('.qz-crud-view .ant-table .ant-table-fixed-left .ant-table-thead, .qz-crud-view .ant-table .ant-table-fixed-right .ant-table-thead'));
+        // const headerHeight = document.querySelector('.qz-crud-view .ant-table .ant-table-thead').clientHeight;
         // fixedHeader.forEach(item => {
         //   item.style.height = `${headerHeight}px`;
         // });

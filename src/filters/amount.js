@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-28 15:43:17
  * @Description: 金额格式化，舍掉的小数会进行四舍五入处理
- * @FilePath: \bgy-component\src\filters\amount.js
+ * @FilePath: \qz-component\src\filters\amount.js
  */
 export default function (value, precision = 2) {
   const options = {

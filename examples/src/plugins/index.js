@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-01-28 11:06:25
  * @Description: 插件
- * @FilePath: \bgy-component\examples\src\plugins\index.js
+ * @FilePath: \qz-component\examples\src\plugins\index.js
  */
 import Vue from 'vue'
 import AxiosPlugin from './axios'

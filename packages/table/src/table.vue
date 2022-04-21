@@ -4,10 +4,10 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-16 14:20:10
  * @Description: 数据表格
- * @FilePath: \bgy-component\packages\table\src\table.vue
+ * @FilePath: \qz-component\packages\table\src\table.vue
 -->
 <template>
-  <div class="bgy-table" :class="{ 'bgy-table--title': title }">
+  <div class="qz-table" :class="{ 'qz-table--title': title }">
     <a-table
       :data-source="dataSource"
       :loading="tableLoading"
@@ -82,7 +82,7 @@
 
 <script>
 export default {
-  name: 'BgyTable',
+  name: 'QzTable',
 
   props: {
     // 请求接口地址获取数据，优先级高于 tableData

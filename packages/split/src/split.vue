@@ -107,7 +107,7 @@ const off = (function () {
 
 
 export default {
-  name: 'BgySplit',
+  name: 'QzSplit',
 
   components: {
     Trigger
@@ -141,7 +141,7 @@ export default {
    */
   data() {
     return {
-      prefix: 'bgy-split',
+      prefix: 'qz-split',
       offset: 0,
       oldOffset: 0,
       isMoving: false,

@@ -4,7 +4,7 @@ const port = 8080
 
 export default defineConfig({
   port,
-  title: 'BgyComponent',
+  title: 'QzComponent',
   description: '基于 Ant Design Vue 封装，快速开发中后台系统页面',
 
   head: [['link', { rel: 'icon', href: '/images/favicon.ico' }]],

@@ -28,9 +28,9 @@
         [
           "module-resolver",
           // {
-          //   "root": ["BgyComponent"],
+          //   "root": ["QzComponent"],
           //   "alias": {
-          //     "BgyComponent/src": "BgyComponent/dist"
+          //     "QzComponent/src": "QzComponent/dist"
           //   }
           // }
         ]

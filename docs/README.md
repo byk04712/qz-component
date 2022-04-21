@@ -4,7 +4,7 @@ description: 基于 Ant Design Vue 封装，快速开发中后台系统页面
 title: 首页
 
 heroImage: /images/logo.png
-# heroText: BgyComponent 组件库
+# heroText: QzComponent 组件库
 tagline: 基于 Ant Design Vue 封装，快速开发中后台系统页面
 
 actionText: 快速上手
@@ -25,17 +25,17 @@ features:
 import Vue from 'vue'
 import App from './App.vue'
 import Antd from 'ant-design-vue'
-import BgyComponent from 'bgy-component'
+import QzComponent from 'qz-component'
 // 1. 导入 ant-design-vue 样式文件
 import 'ant-design-vue/dist/antd.css'
-// 2. 导入 bgy-component 样式文件
-import 'bgy-component/dist/index.css'
+// 2. 导入 qz-component 样式文件
+import 'qz-component/dist/index.css'
 
 Vue.config.productionTip = false
 
-// bgy-component 基于 ant-design-vue，必须 use 它
+// qz-component 基于 ant-design-vue，必须 use 它
 Vue.use(Antd)
-Vue.use(BgyComponent)
+Vue.use(QzComponent)
 
 new Vue({
   // ...
@@ -45,5 +45,5 @@ new Vue({
 ```
 
 ::: slot footer
-footer: MIT Licensed | Copyright © 2022-present qinzhen09@countrygarden.com.cn
+footer: MIT Licensed | Copyright © 2022-present 739694218@qq.com
 :::

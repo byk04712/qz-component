@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-28 14:43:30
  * @Description:
- * @FilePath: \bgy-component\src\mixins\selection.js
+ * @FilePath: \qz-component\src\mixins\selection.js
  */
 export default {
   methods: {

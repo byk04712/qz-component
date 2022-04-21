@@ -8,8 +8,8 @@ Crud 组件查询字段，Form 组件字段均使用到了 Item, 和 [ItemRange]
 ```vue
 <template>
   <div>
-    <bgy-item :props="props1" v-model="value1"></bgy-item>
-    <bgy-item :props="props2" v-model="value2"></bgy-item>
+    <qz-item :props="props1" v-model="value1"></qz-item>
+    <qz-item :props="props2" v-model="value2"></qz-item>
   </div>
 </template>
 <script>

@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2021-11-15 11:12:38
  * @Description: 表单区间字段组件
- * @FilePath: \admin-fronted\bgy-component\packages\item-range\index.js
+ * @FilePath: \admin-fronted\qz-component\packages\item-range\index.js
  */
 import ItemRange from './src/item-range.vue'
 

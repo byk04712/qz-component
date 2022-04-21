@@ -29,7 +29,7 @@ export default {
 
   data() {
     return {
-      prefix: 'bgy-split-trigger',
+      prefix: 'qz-split-trigger',
       initOffset: 0,
       isExpand: true,
     };

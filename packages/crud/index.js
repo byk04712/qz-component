@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2021-11-15 11:41:08
  * @Description:
- * @FilePath: \admin-fronted\bgy-component\packages\crud\index.js
+ * @FilePath: \admin-fronted\qz-component\packages\crud\index.js
  */
 import Crud from './src/crud.vue'
 

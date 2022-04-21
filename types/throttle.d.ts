@@ -4,11 +4,11 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-18 15:50:26
  * @Description: Throttle 组件typescript声明文件
- * @FilePath: \bgy-component\types\throttle.d.ts
+ * @FilePath: \qz-component\types\throttle.d.ts
  */
-import { BgyComponent } from './component'
+import { QzComponent } from './component'
 
-export declare class Throttle extends BgyComponent {
+export declare class Throttle extends QzComponent {
   /**
    * 间隔时间
    * @default 300

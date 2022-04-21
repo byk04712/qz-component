@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2021-11-16 00:18:46
  * @Description: 节流防抖
- * @FilePath: /bgy-component/src/util/throttle.js
+ * @FilePath: /qz-component/src/util/throttle.js
  */
 export function throttle (
   delay, // 延时的时间,单位毫秒

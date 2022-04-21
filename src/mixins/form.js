@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-03-01 09:01:04
  * @Description: 表单混入
- * @FilePath: \bgy-component\src\mixins\form.js
+ * @FilePath: \qz-component\src\mixins\form.js
  */
 import { deepClone } from '../../src/util/utils'
 

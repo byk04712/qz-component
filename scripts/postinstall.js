@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-03-01 09:00:35
  * @Description:
- * @FilePath: \bgy-component\scripts\postinstall.js
+ * @FilePath: \qz-component\scripts\postinstall.js
  */
 const pkg = require('../package.json')
 const env = process.env
@@ -24,6 +24,6 @@ function log (it) {
 }
 
 if (!ADBLOCK && !CI && !DISABLE_OPENCOLLECTIVE && !SILENT) {
-  log(`\u001B[96m感谢您安装并使用 bgy-component@${pkg.version} (\u001B[94m ${pkg.repository.url} \u001B[96m)\u001B[0m\n`)
+  log(`\u001B[96m感谢您安装并使用 qz-component@${pkg.version} (\u001B[94m ${pkg.repository.url} \u001B[96m)\u001B[0m\n`)
   log(`\u001B[96m如遇到组件问题或者任何建议，欢迎给我们提 issue (\u001B[94m ${pkg.bugs.url} \u001B[96m)\u001B[0m`)
 }

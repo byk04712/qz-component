@@ -9,8 +9,8 @@ Crud 组件查询字段，Form 组件字段均使用到了 [Item](/component/ite
 ```vue
 <template>
   <div>
-    <bgy-item-range :props="props1" v-model="value1"></bgy-item-range>
-    <bgy-item-range :props="props2" v-model="value2"></bgy-item-range>
+    <qz-item-range :props="props1" v-model="value1"></qz-item-range>
+    <qz-item-range :props="props2" v-model="value2"></qz-item-range>
   </div>
 </template>
 <script>

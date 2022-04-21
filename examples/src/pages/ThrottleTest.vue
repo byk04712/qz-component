@@ -4,16 +4,16 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-17 15:44:44
  * @Description: 防抖
- * @FilePath: \bgy-component\examples\src\pages\ThrottleTest.vue
+ * @FilePath: \qz-component\examples\src\pages\ThrottleTest.vue
 -->
 
 <template>
   <div>
     <div @dblclick="log('dblclick 666')" @mousemove="log('mousemove')">666</div>
     <br/>
-    <bgy-throttle>
+    <qz-throttle>
       <a-button type="primary" @click.native="onClickA">抽象组件防抖{{count}}</a-button>
-    </bgy-throttle>
+    </qz-throttle>
     <br/><br/>
     <a-button
       type="primary"

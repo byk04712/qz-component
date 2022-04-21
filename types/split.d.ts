@@ -4,11 +4,11 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-18 15:53:25
  * @Description: Split 组件typescript声明文件
- * @FilePath: \bgy-component\types\split.d.ts
+ * @FilePath: \qz-component\types\split.d.ts
  */
-import { BgyComponent } from './component'
+import { QzComponent } from './component'
 
-export declare class Split extends BgyComponent {
+export declare class Split extends QzComponent {
   /**
    * 左侧/上侧 占据空间
    * @default 0.5

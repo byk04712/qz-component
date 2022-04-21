@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-15 09:55:00
  * @Description: 弹窗导入
- * @FilePath: \bgy-component\packages\crud\src\modalImport.vue
+ * @FilePath: \qz-component\packages\crud\src\modalImport.vue
 -->
 <template>
   <a-modal

@@ -4,9 +4,9 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-18 09:33:50
  * @Description: Table组件typescript声明文件
- * @FilePath: \bgy-component\types\table\table.d.ts
+ * @FilePath: \qz-component\types\table\table.d.ts
  */
-import { BgyComponent } from '../component'
+import { QzComponent } from '../component'
 
-export declare class Table extends BgyComponent {
+export declare class Table extends QzComponent {
 }

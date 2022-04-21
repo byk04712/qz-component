@@ -1,5 +1,5 @@
-export * from './bgy-component'
+export * from './qz-component'
 
-import * as BgyComponent from './bgy-component'
+import * as QzComponent from './qz-component'
 
-export default BgyComponent
+export default QzComponent

@@ -4,11 +4,11 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-16 10:33:24
  * @Description: 
- * @FilePath: \bgy-component\examples\src\pages\FormTest.vue
+ * @FilePath: \qz-component\examples\src\pages\FormTest.vue
 -->
 <template>
   <div>
-    <bgy-form v-bind="formConfig" v-model="formData"></bgy-form>
+    <qz-form v-bind="formConfig" v-model="formData"></qz-form>
   </div>
 </template>
 

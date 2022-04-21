@@ -4,11 +4,11 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-16 10:29:19
  * @Description: 
- * @FilePath: \bgy-component\examples\src\pages\CrudTest.vue
+ * @FilePath: \qz-component\examples\src\pages\CrudTest.vue
 -->
 <template>
   <div>
-    <bgy-crud v-bind="crudConfig"></bgy-crud>
+    <qz-crud v-bind="crudConfig"></qz-crud>
   </div>
 </template>
 

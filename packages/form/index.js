@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2021-11-15 10:57:44
  * @Description: 表单组件
- * @FilePath: \admin-fronted\bgy-component\packages\form\index.js
+ * @FilePath: \admin-fronted\qz-component\packages\form\index.js
  */
 import Form from './src/form.vue'
 

@@ -7,7 +7,7 @@ crud 封装了常见的 **C**reate **R**etrieve **U**pdate **D**elete 操作。
 ::: demo 接口为在线 [fastmock](https://www.fastmock.site/) 数据，每次都将生成不同Mock数据
 ```vue
 <template>
-  <bgy-crud v-bind="crudConfig"></bgy-crud>
+  <qz-crud v-bind="crudConfig"></qz-crud>
 </template>
 <script>
 export default {

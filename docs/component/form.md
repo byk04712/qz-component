@@ -8,12 +8,12 @@
 ::: demo 代码中接口为在线 [fastmock](https://www.fastmock.site/) 数据
 ```vue
 <template>
-  <bgy-form v-bind="formConfig" v-model="form" @submit="handleSubmit">
+  <qz-form v-bind="formConfig" v-model="form" @submit="handleSubmit">
     <!-- 自定义按钮 -->
     <template #button="{ form }">
       <a-tag color="pink">字段有{{Object.keys(form).length}}个</a-tag>
     </template>
-  </bgy-form>
+  </qz-form>
 </template>
 
 <script>

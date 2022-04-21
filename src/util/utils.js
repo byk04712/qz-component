@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-03-09 12:29:53
  * @Description: 工具类函数
- * @FilePath: \bgy-component\src\util\utils.js
+ * @FilePath: \qz-component\src\util\utils.js
  */
 
 /**

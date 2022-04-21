@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-17 09:15:51
  * @Description: Axios封装
- * @FilePath: \bgy-component\src\plugins\axios.js
+ * @FilePath: \qz-component\src\plugins\axios.js
  */
 import axios from 'axios'
 

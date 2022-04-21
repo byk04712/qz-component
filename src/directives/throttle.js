@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-28 15:29:05
  * @Description: 事件防抖指令
- * @FilePath: \bgy-component\src\directives\throttle.js
+ * @FilePath: \qz-component\src\directives\throttle.js
  */
 // import { throttle } from '../util/throttle'
 import { message } from 'ant-design-vue'

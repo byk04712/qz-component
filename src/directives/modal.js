@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-28 15:13:25
  * @Description: Modal框自定义指令
- * @FilePath: \bgy-component\src\directives\modal.js
+ * @FilePath: \qz-component\src\directives\modal.js
  */
 import Vue from 'vue'
 

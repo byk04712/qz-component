@@ -4,7 +4,7 @@
 * @LastEditors: Do not edit
 * @LastEditTime: 2021-11-18 00:33:57
 * @Description: 节流防抖
-* @FilePath: /bgy-component/packages/throttle/index.js
+* @FilePath: /qz-component/packages/throttle/index.js
 */
 import { message } from 'ant-design-vue'
 
@@ -45,7 +45,7 @@ const throttle = (fn, duration = 50, isDebounce, ctx, immediate) => {
 }
 
 export default {
-  name: 'BgyThrottle',
+  name: 'QzThrottle',
 
   abstract: true,
 

@@ -9,9 +9,9 @@ import { Split } from './split'
 import { Throttle } from './throttle'
 
 /**
- * Install all bgy-component components into Vue.
+ * Install all qz-component components into Vue.
  * Please do not invoke this method directly.
- * Call `Vue.use(BgyComponent)` to install
+ * Call `Vue.use(QzComponent)` to install
  */
 export function install(vue: typeof Vue): void
 

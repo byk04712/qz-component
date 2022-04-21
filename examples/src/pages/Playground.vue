@@ -4,11 +4,11 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-03-01 16:35:04
  * @Description: 
- * @FilePath: \ant-design-adminc:\Users\qinzhen09\workspace\bgy-component\examples\src\pages\Playground.vue
+ * @FilePath: \ant-design-adminc:\Users\qinzhen09\workspace\qz-component\examples\src\pages\Playground.vue
 -->
 <template>
   <div>
     练习
-    <bgy-item></bgy-item>
+    <qz-item></qz-item>
   </div>
 </template>

@@ -4,10 +4,10 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-03-01 16:37:49
  * @Description: 输入项
- * @FilePath: \ant-design-adminc:\Users\qinzhen09\workspace\bgy-component\packages\item\src\item.vue
+ * @FilePath: \ant-design-adminc:\Users\qinzhen09\workspace\qz-component\packages\item\src\item.vue
 -->
 <template>
-  <div class="bgy-item">
+  <div class="qz-item">
     <!-- 下拉选项框 -->
     <a-select
       v-if="props.type === 'select'"
@@ -195,7 +195,7 @@ import moment from 'moment';
 // import AreaCascader from '@/components/cascader/areaCascader.vue';
 
 export default {
-  name: 'BgyItem',
+  name: 'QzItem',
 
   props: {
     // item 的配置属性

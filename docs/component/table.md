@@ -8,7 +8,7 @@
 ::: demo 接口为在线 [fastmock](https://www.fastmock.site/) 数据，每次都将生成不同Mock数据
 ```vue
 <template>
-  <bgy-table v-bind="tableConfig"></bgy-table>
+  <qz-table v-bind="tableConfig"></qz-table>
 </template>
 <script>
 export default {
@@ -66,7 +66,7 @@ export default {
 ::: demo
 ```vue
 <template>
-  <bgy-table v-bind="tableConfig"></bgy-table>
+  <qz-table v-bind="tableConfig"></qz-table>
 </template>
 <script>
 export default {

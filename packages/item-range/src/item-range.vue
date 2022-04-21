@@ -4,10 +4,10 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-16 11:00:29
  * @Description: 区间范围
- * @FilePath: \bgy-component\packages\item-range\src\item-range.vue
+ * @FilePath: \qz-component\packages\item-range\src\item-range.vue
 -->
 <template>
-  <div class="bgy-item-range">
+  <div class="qz-item-range">
 
     <!-- 开区间（起始或结束可以为空） -->
     <a-form-model-item
@@ -16,7 +16,7 @@
       :colon="props.colon !== false"
       :required="(props.rules || []).some(e => e.required)"
       :auto-link="false"
-      class="bgy-item-range--stage"
+      class="qz-item-range--stage"
     >
       <a-row type="flex">
         <!-- 起始字段 -->
@@ -178,7 +178,7 @@ function getOrderArray(n) {
 }
 
 export default {
-  name: 'BgyItemRange',
+  name: 'QzItemRange',
 
   props: {
     // item 的配置属性

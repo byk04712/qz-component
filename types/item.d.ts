@@ -4,10 +4,10 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-18 17:17:23
  * @Description: Item 组件typescript声明文件
- * @FilePath: \bgy-component\types\item.d.ts
+ * @FilePath: \qz-component\types\item.d.ts
  */
 import { VNode } from 'vue'
-import { BgyComponent } from './component'
+import { QzComponent } from './component'
 
 interface OptionItem {
   value: string
@@ -239,7 +239,7 @@ export declare type ItemProps = TextItemProps
 
 export declare type ItemValue = string | number | Array<any> | object | boolean
 
-export declare class Item extends BgyComponent {
+export declare class Item extends QzComponent {
   /**
    * 属性
    */

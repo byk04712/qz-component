@@ -4,7 +4,7 @@
  * @LastEditors: Do not edit
  * @LastEditTime: 2022-02-18 11:47:17
  * @Description: 组件入口文件
- * @FilePath: \bgy-component\src\index.js
+ * @FilePath: \qz-component\src\index.js
  */
 import { version } from '../package.json'
 import Item from '../packages/item/index'

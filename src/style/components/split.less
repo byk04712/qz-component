@@ -1,5 +1,5 @@
 
-@css-prefix: 'bgy-';
+@css-prefix: 'qz-';
 @split-prefix-cls: ~'@{css-prefix}split';
 @box-shadow: 0 0 4px 0 rgba(28, 36, 56, 0.4);
 @trigger-bar-background: rgba(23, 35, 61, 0.25);
@@ -11,7 +11,7 @@
 @trigger-bar-weight: 1px;
 @trigger-bar-con-height: (@trigger-bar-weight + @trigger-bar-interval) * 8;
 
-.bgy-split {
+.qz-split {
   &-wrapper {
     position: relative;
     width: 100%;
@@ -92,7 +92,7 @@
       border-top: none;
       border-bottom: none;
       cursor: col-resize;
-      .bgy-split-trigger-bar {
+      .qz-split-trigger-bar {
         width: @trigger-bar-width;
         height: 1px;
         background: @trigger-bar-background;
@@ -107,7 +107,7 @@
       border-left: none;
       border-right: none;
       cursor: row-resize;
-      .bgy-split-trigger-bar {
+      .qz-split-trigger-bar {
         height: @trigger-bar-width;
         width: 1px;
         background: @trigger-bar-background;
@@ -117,14 +117,14 @@
     }
   }
   &-horizontal {
-    > .bgy-split-trigger-con {
+    > .qz-split-trigger-con {
       top: 50%;
       height: 100%;
       width: 0;
     }
   }
   &-vertical {
-    > .bgy-split-trigger-con {
+    > .qz-split-trigger-con {
       left: 50%;
       height: 0;
       width: 100%;

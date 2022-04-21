@@ -8,18 +8,18 @@
 <template>
   <div>
     <div class="demo-split">
-      <bgy-split v-model="split1" mode="horizontal">
+      <qz-split v-model="split1" mode="horizontal">
         <div slot="left" class="demo-split-pane">Left Pane</div>
         <div slot="right" class="demo-split-pane">Right Pane</div>
-      </bgy-split>
+      </qz-split>
     </div>
     <br>
     <br>
     <div class="demo-split">
-      <bgy-split v-model="split2" mode="vertical">
+      <qz-split v-model="split2" mode="vertical">
         <div slot="top" class="demo-split-pane">Top Pane</div>
         <div slot="bottom" class="demo-split-pane">Bottm Pane</div>
-      </bgy-split>
+      </qz-split>
     </div>
   </div>
 </template>
