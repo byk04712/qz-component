@@ -20,4 +20,4 @@ title: 介绍
 
 ### 如何贡献
 
-如果你希望参与贡献，欢迎 [Pull Request](http://39.108.40.223:666/xuxuan02/component-lib/-/merge_requests)，或给我们 [报告Bug](http://39.108.40.223:666/xuxuan02/component-lib/-/issues)
+如果你希望参与贡献，欢迎 [Pull Request](https://github.com/byk04712/qz-component/pulls)，或给我们 [报告Bug](https://github.com/byk04712/qz-component/issues)
