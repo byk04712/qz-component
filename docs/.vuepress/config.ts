@@ -39,11 +39,9 @@ export default defineConfig({
 
     // 参考地址
     repoLabel: 'GitLab',
-    repo: 'http://39.108.40.223:666/xuxuan02/component-lib.git',
+    repo: 'https://github.com/byk04712/qz-component.git',
 
     // 文档仓库等信息
-    // docsRepo: 'http://39.108.40.223:666/fronted/lib-docs',
-    // docsBranch: 'master',
     docsDir: 'docs',
     editLinks: true,
     editLinkText: '帮助我们改善此页面',
