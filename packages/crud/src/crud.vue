@@ -2,9 +2,15 @@
  * @Author: Do not edit
  * @Date: 2021-09-09 11:07:25
  * @LastEditors: Do not edit
- * @LastEditTime: 2022-02-28 23:12:26
+<<<<<<< HEAD
+ * @LastEditTime: 2022-05-19 22:41:21
  * @Description: CRUD 组件
- * @FilePath: \qz-component\packages\crud\src\crud.vue
+ * @FilePath: /bgy-component/packages/crud/src/crud.vue
+=======
+ * @LastEditTime: 2022-05-19 21:30:15
+ * @Description: CRUD 组件
+ * @FilePath: /bgy-component/packages/crud/src/crud.vue
+>>>>>>> b7dbc02 (feat: 添加自定义表格头支持)
 -->
 <template>
   <a-spin class="qz-crud" :spinning="spinning">
@@ -176,6 +182,10 @@
           v-for="item of showTableColumn"
           :align="item.amount ? 'right' : item.align"
         >
+          <!-- 自定义表头 -->
+          <template v-if="item.scopedSlots && item.scopedSlots.title" #title>
+            <slot :name="item.scopedSlots.title"></slot>
+          </template>
           <template slot-scope="text, record, index, column">
             <!-- 如果有自定义列 -->
             <template v-if="item.scopedSlots && item.scopedSlots.customRender">
