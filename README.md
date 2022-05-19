@@ -16,6 +16,29 @@ npm i
 
 npm run dev
 ````
+
+### Usage
+```js
+import Vue from 'vue'
+import App from './App.vue'
+import Antd from 'ant-design-vue'
+import QzComponent from 'qz-component'
+// 1. 导入 ant-design-vue 样式文件
+import 'ant-design-vue/dist/antd.css'
+// 2. 导入 qz-component 样式文件
+import 'qz-component/dist/index.css'
+
+Vue.config.productionTip = false
+
+// qz-component 基于 ant-design-vue，必须 use 它
+Vue.use(Antd)
+Vue.use(QzComponent)
+
+new Vue({
+  // ...
+  render: function (h) { return h(App) },
+}).$mount('#app')
+```
 ### 目录结构
 ```
 ├── build # 编译脚本
@@ -30,3 +53,4 @@ npm run dev
 ├── test # 测试（暂无）
 └── types # TS类型定义
 ```
+
